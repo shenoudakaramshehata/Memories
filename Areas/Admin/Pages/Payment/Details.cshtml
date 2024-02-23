@@ -1,0 +1,334 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Payment.DetailsModel
+@{
+    Layout = "~/Pages/Shared/_MainLayout.cshtml";
+}
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId={YOUR_FACBOOK_APP_ID}&autoLogAppEvents=1" nonce="ywRETNx8"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<style>
+    .input_copy_wrapper {
+        /*width: 450px;*/
+        padding: 50px;
+        margin: 0 auto;
+    }
+
+    .input_copy {
+        padding: 15px 25px;
+        background: #eee;
+        border: 2px solid #aaa;
+        color: #aaa;
+        font-size: .8em;
+    }
+
+        .input_copy .icon {
+            display: block;
+            /*max-width: 25px;*/
+            cursor: pointer;
+            float: right;
+        }
+
+            .input_copy .icon img {
+                max-width: 25px;
+            }
+
+        .input_copy .txt {
+            /*width: 80%;*/
+            display: inline-block;
+            overflow: hidden;
+        }
+
+
+    /* click animation */
+
+    .flashBG {
+        animation-name: flash;
+        animation-timing-function: ease-out;
+        animation-duration: 1s;
+    }
+
+    @@keyframes flash {
+        0% {
+            background: #28a745;
+        }
+
+        100% {
+            background: transparent;
+        }
+    }
+</style>
+
+@*<a href="javascript:;" class="messenger-wrap" onclick="messengerShare()">
+        <i class="fab fa-facebook-messenger"></i>
+        <span>Share on Messenger</span>
+    </a>*@
+<div class="container">
+    <div data-v-04358d3c="" style="margin-top: 90px; margin-bottom: 90px; max-width: 75%; margin-left: auto; margin-right: auto;" class="transition-details-card v-card v-sheet theme--light">
+        <nav data-v-04358d3c="" class="v-toolbar theme--dark" data-booted="true"
+             style="text-align:center;background: #263238; color: #f5f5f5;font-size:42px ;margin-top: 0px; padding-right: 0px; padding-left: 0px; transform: translateY(0px); ">
+            <div class="v-toolbar__content" style="height: 100px;">
+                <div data-v-04358d3c="" class="v-toolbar__title" style="padding-top: 35px;">@sharedResource["Details"] </div>
+                <div data-v-04358d3c="" class="spacer"></div>
+                <!---->
+            </div>
+        </nav>
+        <div data-v-04358d3c="" role="list" class="v-list pb-0 v-list--subheader v-list--two-line theme--light">
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <img style="border-radius: 13%;" width="250" height="250" src="@Model.QRScan" class="img-thumbnail" />
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light row">
+                    @*<div class="input_copy_wrapper">
+                            <div class="input_copy">
+                                <span class="txt"></span>
+                                <span class="icon right">
+                                    <img src="http://clipground.com/images/copy-4.png"
+                                         title="Click to Copy">
+                                </span>
+                            </div>
+
+                        </div>*@
+                    <div class="alert alert-dismissible alert-success col-lg-12 col-md-12" style="display:none" id="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>@sharedResource["URL Copied"] !</strong> .
+                    </div>
+
+
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Payment URL"] </div>
+                        <div id="p1" data-v-04358d3c="" class="v-list__tile__title dis_copy"
+                             style=" word-break: break-word;justify-content: space-between; display: flex;">
+                            @Model.URL
+                            <i style="cursor: pointer; color: #5dc7fd; font-weight: bold; font-size: x-large;" onclick="copyToClipboard('#p1')" data-v-04358d3c="" aria-hidden="true"
+                               class="fas fa-copy"></i>
+
+                            <i>
+                                @*<a style="color: #5dc7fd; font-weight: bold; font-size: x-large; " href="whatsapp://send?text=@Model.URL" data-action="share/whatsapp/share"
+                                    target="_blank" class="fa fa-whatsapp"></a>*@
+                                <a style="color: #5dc7fd; font-weight: bold; font-size: x-large; " target="_blank" class="fa fa-whatsapp" href="https://api.whatsapp.com/send?text=@Model.URL" data-action="share/whatsapp/share"></a>
+
+                            </i>
+
+                            <a style=" color: #5dc7fd; font-weight: bold; font-size: x-large;" href="javascript:;" class="messenger-wrap" onclick="messengerShare()">
+                                <i class="fab fa-facebook-messenger"></i>
+                                @*<span>Share on Messenger</span>*@
+                            </a>
+                            <a style="color: #5dc7fd; font-weight: bold; font-size: x-large;" href="mailto:?body=@Model.URL" target="_top"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Attachment URL"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title">
+
+                            <a style="color: #5dc7fd" data-v-04358d3c=""
+                               href="~/@Model.payment.Attachment" download="">@sharedResource["Download"] </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Amount"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.payment.Amout
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Gateway"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.Gateway.Title
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Gateway codes"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.Gateway.TestURL
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Currency"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            KWD
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Language"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @*@Model.payment.Language.Title*@
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Remarks"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.payment.Remarks
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Merchant order no"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.Gateway.MerchantId
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Customer first name"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.payment.FirstName
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Customer last name"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.payment.LastName
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Customer email"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title"
+                             style="justify-content: space-between; display: flex;">
+                            @Model.payment.Email
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr data-v-04358d3c="" class="v-divider theme--light">
+            <div data-v-04358d3c="" role="listitem">
+                <div class="v-list__tile theme--light">
+                    <div data-v-04358d3c="" class="v-list__tile__content">
+                        <div data-v-04358d3c="" class="v-list__tile__sub-title">@sharedResource["Customer phone"] </div>
+                        <div data-v-04358d3c="" class="v-list__tile__title">+@Model.payment.PhoneNumber</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+
+
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+        document.getElementById("alert").style.display = "block"
+    };
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '703844814106160', status: true, cookie: true,
+            xfbml: true
+        });
+    };
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '{YOUR_FACEBOOK_APP_ID}',
+        xfbml: true,
+        version: 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+};
+function isMobile() {
+    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i];
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+    function messengerShare() {
+        url = '@Model.Url';
+    if (isMobile()) {
+        window.location.href = "fb-messenger://share/?link=" + url;
+    } else {
+        FB.ui({
+            method: 'send',
+            link: url,
+            redirect_uri: url
+        });
+    }
+}
+</script>

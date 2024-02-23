@@ -1,0 +1,119 @@
+﻿@page
+@model Memories.Pages.MasterCardCheckoutModel
+@{
+    Layout = null;
+}
+
+@*@page
+    @model mastercard.Pages.CheckoutModel
+    @{
+        Layout = null;
+    }
+
+    <div class="alert alert-dismissible alert-success" style="display:none" id="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>"URL Copied" !</strong> .
+    </div>
+
+
+
+
+
+    <script src="https://eu-gateway.mastercard.com/static/checkout/checkout.min.js" data-error="errorCallback" data-cancel="cancelCallback"></script>
+    <script type="text/javascript">
+
+            var sessionId = "@Model.session.id";
+        var resultIndicator = null;
+        console.log(sessionId);
+        console.log(@Model.orderid);
+
+
+
+        function errorCallback(error) {
+            alert("Error:" + JSON.stringify(error));
+        }
+        function cancelCallback() {
+            console.log('Payment cancelled');
+            resultIndicator = "CANCELED" ;
+            // Reload the page to generate a new session ID - the old one is out of date as soon as the lightbox is invoked
+            window.location.reload(true);
+        }
+
+        Checkout.configure({
+            session: {
+                id: sessionId
+            },
+             interaction: {
+                operation: "PURCHASE",
+
+                merchant: {
+                    name: 'Memories',
+                    address: {
+                        line1: 'kuwait',
+                        line2: 'kuwait'
+                    },
+                    //email: 'order@yourMerchantEmailAddress.com',
+                    //phone: '+1 123 456 789 012',
+                    //logo: 'https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600'
+                },
+                locale: 'en_US',
+
+                //displayControl: {
+                //    billingAddress: 'Adnan',
+                //    customerEmail: 'aya@gmail.com',
+                //    shipping: 'HIDE'
+                //}
+            },
+            order: {
+                description: "Ordered goods",
+                id: "@Model.orderid"
+            }
+        });
+        Checkout.showPaymentPage();
+    </script>*@
+
+
+<html>
+<head>
+    <script src="https://ap-gateway.mastercard.com/static/checkout/checkout.min.js" data-error="errorCallback" data-cancel="cancelCallback">
+
+    </script>
+
+    <script type="text/javascript">
+        var session = "@Model.session.id";
+
+                function errorCallback(error) {
+                  console.log(JSON.stringify(error));
+            }
+            function cancelCallback() {
+                  console.log('Payment cancelled');
+            }
+
+    Checkout.configure({
+                session: {
+                    id: session
+                },
+                 interaction: {
+            operation: "PURCHASE",
+
+                     merchant: {
+                         name: 'Memories',
+                         address: {
+                             line1: 'kuwait',
+                             line2: 'kuwait'
+                         }
+                     },
+                      displayControl: {
+                          billingAddress: 'HIDE',
+                         shipping: 'HIDE'
+                     }
+                },
+            });
+        Checkout.showPaymentPage();
+
+
+    </script>
+</head>
+<body>
+</body>
+</html>

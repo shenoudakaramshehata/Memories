@@ -1,0 +1,73 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.repportmanagement.CustomerTransactionsModel
+@{
+    Layout = "~/Pages/Shared/_MainLayout.cshtml";
+}
+<div class="card-body">
+   
+   
+    <div class="container">
+        <h2>@sharedResource["Live Customer Transactions"]  </h2>
+        <br />
+        <br />
+
+        <div class="container pt-10">
+
+
+            @(Html.DevExtreme().DataGrid<Memories.Models.PaymentModel>()
+    .DataSource(Model.Transactions)
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .ShowBorders(true)
+    .OnExporting("exporting")
+    .HeaderFilter(headerFilter => headerFilter.Visible(true))
+    .ColumnAutoWidth(true)
+    .WordWrapEnabled(true)
+    .ShowBorders(true)
+    .Paging(p => p.PageSize(5))
+    .Pager(p => p.ShowPageSizeSelector(true).AllowedPageSizes(new[] { 10, 20, 40, 80 }))
+    .SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true).Placeholder(sharedResource["searching"]))
+    .FilterRow(filterRow => filterRow
+    .Visible(true)
+    .ApplyFilter(GridApplyFilterMode.Auto)
+    )
+    .HeaderFilter(headerFilter => headerFilter.Visible(true))
+    .Columns(columns => {
+        columns.AddFor(m => m.GateWayId).Caption(sharedResource["Gateway"]).Lookup(lookup => lookup
+                        .DataSource(ds => ds.WebApi().Controller("LookUp").LoadAction("GateWaysLookup").Key("Value"))
+                        .ValueExpr("Value")
+                        .DisplayExpr("Text")
+                        );
+        columns.AddFor(m => m.payment_type).Caption(sharedResource["Type"]);
+        columns.AddFor(m => m.Amout).Caption(sharedResource["Amount"]);
+        columns.AddFor(m => m.TransactionDate).Caption(sharedResource["TransactionDate"]).DataType(GridColumnDataType.DateTime).Format("dd/MM/yyyy hh:mm:ss");
+
+        columns.AddFor(m => m.OrderNumber).Caption(sharedResource["Order ID"]);
+        columns.AddFor(m => m.issuccess).Caption(sharedResource["Success"]).DataType(GridColumnDataType.String);
+
+
+
+
+    })
+
+    )
+        </div>
+    </div>
+</div>
+<script>
+
+    function exporting(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Transactions');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'TransactionsReport.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+</script>

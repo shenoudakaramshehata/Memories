@@ -1,0 +1,129 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Customer.ProfileModel
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Memories.Data
+@inject UserManager<ApplicationUser> UserManager
+@inject IHttpContextAccessor HttpContext;
+@{
+	Layout = "~/Pages/Shared/_MainLayout.cshtml";
+    var user = UserManager.GetUserAsync(HttpContext.HttpContext.User).Result;
+}
+  <div class="bg-primary">
+    <div class="container d-flex justify-content-center">
+      <ul class="nav nav-pills alternate nav-lg border-bottom-0">
+        <li class="nav-item"> <a class="nav-link active" href="settings-profile.html">@sharedResource["Account"] </a></li>
+        <li class="nav-item"> <a class="nav-link" href="settings-security.html">@sharedResource["Security"]</a></li>
+        <li class="nav-item"> <a class="nav-link" href="settings-payment-methods.html">@sharedResource["Payment Methods"]</a></li>
+        <li class="nav-item"> <a class="nav-link" href="settings-notifications.html">@sharedResource["Notifications"]</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- Secondary Menu end --> 
+  <!-- Content
+  ============================================= -->
+  <div id="content" class="py-4">
+    <div class="container">
+      <div class="row"> 
+        
+        <!-- Left Panel
+        ============================================= -->
+        <aside class="col-lg-3"> 
+          
+          <!-- Profile Details
+          =============================== -->
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <div class="profile-thumb mt-3 mb-4"> <img class="rounded-circle" src="/files/images/profile-thumb.jpg" alt="">
+              <div class="profile-thumb-edit bg-primary text-white" data-bs-toggle="tooltip" title="Change Profile Picture"> <i class="fas fa-camera position-absolute"></i>
+                <input type="file" class="custom-file-input" id="customFile">
+              </div>
+            </div>
+            <p class="text-3 fw-500 mb-2">@sharedResource["Hello"], @User.Identity.Name</p>
+            <p class="mb-2"><a href="settings-profile.html" class="text-5 text-light" data-bs-toggle="tooltip" title="Edit Profile"><i class="fas fa-edit"></i></a></p>
+          </div>
+          <!-- Profile Details End --> 
+          
+          <!-- Available Balance
+          =============================== -->
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <div class="text-17 text-light my-3"><i class="fas fa-wallet"></i></div>
+            <h3 class="text-9 fw-400">$2956.00</h3>
+            <p class="mb-2 text-muted opacity-8">@sharedResource["Available Balance"]</p>
+            <hr class="mx-n3">
+            <div class="d-flex"><a href="withdraw-money.html" class="btn-link me-auto">@sharedResource["Withdraw"]</a> <a href="deposit-money.html" class="btn-link ms-auto">@sharedResource["Deposit"]</a></div>
+          </div>
+          <!-- Available Balance End --> 
+          
+          <!-- Need Help?
+          =============================== -->
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <div class="text-17 text-light my-3"><i class="fas fa-comments"></i></div>
+            <h3 class="text-5 fw-400 my-4">@sharedResource["Need Help"]?</h3>
+            <p class="text-muted opacity-8 mb-4">@sharedResource["Have questions or concerns regrading your account"]?<br>
+             @sharedResource["Our experts are here to help"] !.</p>
+            <div class="d-grid"><a href="#" class="btn btn-primary">@sharedResource["Chate with Us"]</a></div>
+		  </div>
+          <!-- Need Help? End --> 
+        </aside>
+        <!-- Left Panel End --> 
+        
+        <!-- Middle Panel
+        ============================================= -->
+        <div class="col-lg-9"> 
+          
+          <!-- Personal Details
+          ============================================= -->
+          <div class="bg-white shadow-sm rounded p-4 mb-4">
+            <h3 class="text-5 fw-400 d-flex align-items-center mb-4">@sharedResource["Personal Details"]<a href="#edit-personal-details" data-bs-toggle="modal" class="ms-auto text-2 text-uppercase btn-link"><span class="me-1"><i class="fas fa-edit"></i></span>@sharedResource["Edit"]</a></h3>
+            <hr class="mx-n4 mb-4">
+            <div class="row gx-3 align-items-center">
+              <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">@sharedResource["Name"]:</p>
+              <p class="col-sm-9 text-3">@user.UserName</p>
+            </div>
+            <div class="row gx-3 align-items-center">
+              <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">@sharedResource["Phone"]:</p>
+              <p class="col-sm-9 text-3">@user.PhoneNumber</p>
+            </div>
+            <div class="row gx-3 align-items-baseline">
+              <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">@sharedResource["Email"]:</p>
+              <p class="col-sm-9 text-3">@user.Email</p>
+            </div>
+          </div>
+          <!-- Edit Details Modal
+          ================================== -->
+          <div id="edit-personal-details" class="modal fade " role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fw-400">@sharedResource["Personal Details"]</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                  <form id="personaldetails" method="post">
+                    <div class="row g-3">
+                      <div class="col-12 col-sm-6">
+                        <label asp-for="@user.Email" class="form-label">@sharedResource["Email"]</label>
+                        <input type="email" class="form-control" data-bv-field="Email" asp-for="@user.UserName" id="Email" required placeholder="@sharedResource["Email"]">
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label asp-for="@user.Id" class="form-label">@sharedResource[""]UserName</label>
+                        <input  hidden type="text" asp-for="@user.Id" class="form-control" data-bv-field="UserName" id="UserName" required placeholder="@sharedResource[""]UserName">
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label asp-for="@user.PhoneNumber" class="form-label">@sharedResource["PhoneNumber"]</label>
+                        <input type="text" asp-for="@user.PhoneNumber" class="form-control" data-bv-field="PhoneNumber" id="PhoneNumber" required placeholder="@sharedResource["PhoneNumber"]">
+                      </div>
+					  <div class="col-12 mt-4 d-grid"><button class="btn btn-primary" type="submit">@sharedResource["Save Changes"]</button></div>
+                    </div>
+                    
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Personal Details End --> 
+        </div>
+        <!-- Middle Panel End --> 
+      </div>
+    </div>
+  </div>

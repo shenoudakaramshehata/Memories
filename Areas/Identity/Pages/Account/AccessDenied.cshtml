@@ -1,0 +1,84 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+    Layout = "";
+}
+<header>
+</header>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+<link href="images/favicon.png" rel="icon" />
+<!-- Web Fonts
+============================================= -->
+<link rel="stylesheet" href="~/files/css/css2.css">
+
+<!-- Stylesheet
+============================================= -->
+<link rel="stylesheet" type="text/css" href="/files/vendor/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/files/vendor/font-awesome/css/all.min.css" />
+<link rel="stylesheet" type="text/css" href="/files/css/stylesheet.css" />
+<!-- Colors Css -->
+<link id="color-switcher" type="text/css" rel="stylesheet" href="#" />
+</head>
+<body>
+    <div class="container">
+<!-- Preloader -->
+<div id="preloader">
+  <div data-loader="dual-ring"></div>
+</div>
+<!-- Preloader End -->
+<div id="main-wrapper" class="min-vh-100 d-flex flex-column">
+  <!-- Login Form
+  ============================================= -->
+  <div class="container my-auto"> 
+    <div class="row g-0">
+      <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-4 m-auto py-5">
+         <h1 class="text-danger">@ViewData["Title"]</h1>
+         <p class="text-danger">You do not have access to this resource.</p>
+     </div>
+    </div>
+  </div>
+  <!-- Login Form End -->
+  <!-- Footer
+  ============================================= -->
+  <div class="container-fluid bg-white py-2">
+    <p class="text-center text-muted mb-0">Copyright &copy; 2022 <a href="#">Payyed</a>. All Rights Reserved.</p>
+  </div>
+</div>
+<!-- Back to Top
+============================================= --> 
+<a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="/files/javascript:void(0)"><i class="fa fa-chevron-up"></i></a>
+<!-- Styles Switcher -->
+<div id="styles-switcher" class="left">
+  <h2 class="text-3">Color Switcher</h2>
+  <hr>
+  <ul>
+    <li class="blue" data-bs-toggle="tooltip" title="Blue" data-path="css/color-blue.css"></li>
+	<li class="indigo" data-bs-toggle="tooltip" title="Indigo" data-path="css/color-indigo.css"></li>
+    <li class="purple" data-bs-toggle="tooltip" title="Purple" data-path="css/color-purple.css"></li>
+	<li class="pink" data-bs-toggle="tooltip" title="Pink" data-path="css/color-pink.css"></li>
+	<li class="red" data-bs-toggle="tooltip" title="Red" data-path="css/color-red.css"></li>
+    <li class="orange" data-bs-toggle="tooltip" title="Orange" data-path="css/color-orange.css"></li>
+	<li class="yellow" data-bs-toggle="tooltip" title="Yellow" data-path="css/color-yellow.css"></li>
+	<li class="teal" data-bs-toggle="tooltip" title="Teal" data-path="css/color-teal.css"></li>
+    <li class="cyan" data-bs-toggle="tooltip" title="Cyan" data-path="css/color-cyan.css"></li>
+    <li class="brown" data-bs-toggle="tooltip" title="Brown" data-path="css/color-brown.css"></li>
+  </ul>
+  <button class="btn btn-dark btn-sm border-0 fw-400 rounded-0 shadow-none" data-bs-toggle="tooltip" title="Green" id="reset-color">Reset Default</button>
+  <button class="btn switcher-toggle"><i class="fas fa-cog"></i></button>
+</div>
+<!-- Styles Switcher End --> 
+
+<!-- Script --> 
+<script src="/files/vendor/jquery/jquery.min.js"></script> 
+<script src="/files/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<!-- Style Switcher --> 
+<script src="/files/js/switcher.min.js"></script> 
+<script src="/files/js/theme.js"></script>
+</div>
+</body>
+</html>

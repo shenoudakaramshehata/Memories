@@ -1,0 +1,110 @@
+﻿@page
+@model Memories.Pages.ResponseModel
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <link href="images/favicon.png" rel="icon" />
+    <title>Memories</title>
+    <meta name="description" content="This professional design html template is for build a Money Transfer and online payments website.">
+    <meta name="author" content="harnishdesign.net">
+
+    <!-- Web Fonts
+    ============================================= -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+
+    <!-- Stylesheet
+    ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/files/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/files/vendor/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/files/vendor/bootstrap-select/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/files/vendor/currency-flags/css/currency-flags.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/files/css/stylesheet.css" />
+    <!-- Colors Css -->
+    <link id="color-switcher" type="text/css" rel="stylesheet" href="#" />
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div data-loader="dual-ring"></div>
+    </div>
+    <!-- Preloader End -->
+    <!-- Document Wrapper
+    ============================================= -->
+    <div id="main-wrapper">
+        @{ if (Model.transaction.Status == "1")
+            {
+                <div id="content" class="py-4">
+                    <div class="container">
+
+                        <!-- Steps Progress bar -->
+
+                        <div class="row">
+                            <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
+                                <!-- Request Money Success
+                                ============================================= -->
+                                <div class="bg-white text-center shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
+                                    <div class="my-4">
+                                        <p class="text-success text-20 lh-1"><i class="fas fa-check-circle"></i></p>
+                                        <p class="text-success text-8 fw-500 lh-1">@sharedResource["Successs"]!</p>
+                                        <p>@Model.payment.FirstName     @Model.payment.LastName</p>
+                                        <p>@Model.payment.Email</p>
+                                        <p>@Model.payment.PaymentModelId</p>
+                                        <p class="lead">@sharedResource["Transactions Complete"]</p>
+                                    </div>
+
+                                </div>
+                                <!-- Request Money Success end -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div id="content" class="py-4">
+                    <div class="container">
+
+                        <!-- Steps Progress bar -->
+
+                        <div class="row">
+                            <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
+                                <!-- Request Money Success
+                                ============================================= -->
+                                <div class="bg-white text-center shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
+                                    <div class="my-4">
+                                        <p class="text-success text-20 lh-1"><i style="color: #dc3545;" class="fas fa-times-circle"></i></p>
+                                        <p class="text-success text-8 fw-500 lh-1">@sharedResource["Failedd"]!</p>
+                                        <p class="lead">@sharedResource["Transactions Failed"]</p>
+                                    </div>
+
+                                </div>
+                                <!-- Request Money Success end -->
+                            </div>
+                        </div>
+                    </div>
+                </div> }
+        }
+        </div>
+        <!--<script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>-->
+        <!-- Style Switcher -->
+        <!--<script src="js/switcher.min.js"></script>
+        <script src="js/theme.js"></script>-->
+</body>
+</html>
+<script src="~/files/vendor/jquery/jquery.min.js"></script>
+<script src="~/files/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/files/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<!-- Style Switcher -->
+<script src="~/files/js/switcher.min.js"></script>
+<script src="~/files/js/theme.js"></script>
+

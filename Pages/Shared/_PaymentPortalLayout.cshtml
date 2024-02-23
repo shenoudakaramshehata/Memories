@@ -1,0 +1,334 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<!-- Mirrored from demo.voidcoders.com/htmldemo/dfoody/main-files/rtl-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Jun 2022 10:40:27 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <title>Dfoody - Restaurant HTML Template</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" rel="stylesheet">
+
+    <link href="~/Admin/assets/css/templatebootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Admin/assets/css/jquery-ui.css" />
+
+    <link rel="stylesheet" href="~/Admin/assets/css/sm-core-css.css" />
+    <link rel="stylesheet" href="~/Admin/assets/css/sm-simple.css" />
+
+    <link rel="stylesheet" href="~/Admin/assets/css/font-awesome.min.css" />
+
+
+    <link href="~/Admin/assets/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Admin/assets/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Admin/assets/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Admin/assets/css/jquery.fancybox.min.css" />
+
+    <link href="~/Admin/assets/slick/slick-theme.css" rel="stylesheet" />
+    <link href="~/Admin/assets/slick/slick.css" rel="stylesheet" />
+
+    <link href="~/Admin/assets/YoutubeVideoModalPlugin/jquery.yu2fvl.css" rel="stylesheet" />
+    <link href="~/Admin/assets/css/animate.css" rel="stylesheet" />
+
+    <link href="~/Admin/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Admin/assets/css/responsive.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" type="image/png" href="https://demo.voidcoders.com/htmldemo/dfoody/main-files/assets/img/favicon.ico">
+
+
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+</head>
+<body>
+    <div id="preloader"></div>
+
+    <header class="header-area dfoody-header">
+        <div class="dfoody-top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="gth-content gth-left">
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>Materfront avenue, street 1F, USA</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="gth-content gth-right">
+                            <p>اتصل الان: <a href="tel:8883875000">888.387.8888</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dfoody-header-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 col-md-3">
+                        <div class="logo-wrapper">
+                            <a asp-page="Index">
+
+                                <img src="~/Admin/assets/img/logo.png" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-9 col-md-9">
+                        <div class="gm-box">
+                            <div class="dfoody-menu-wrapper">
+
+                                <input id="dfoodyMenu-state" type="checkbox" />
+                                <label class="dfoodyMenu-btn" for="dfoodyMenu-state"> 
+                                    <span class="dfoodyMenu-btn-icon"></span>
+                                </label>
+                                <ul id="dfoodyMenu" class="sm sm-simple dfoody-menu">
+                                    <li>
+                                        <a href="index.html">الصفحة الرئيسية</a>
+                                        <ul>
+                                            <li><a href="index.html">الصفحة الرئيسية-1</a></li>
+                                            <li><a href="index-2.html">الصفحة الرئيسية-2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="about.html">حول</a></li>
+                                    <li>
+                                        <a href="reservation.html">حجز</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Templatepages" asp-page="FoodMenu">قائمة طعام</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog.html">مدونة</a>
+                                        <ul>
+                                            <li>
+                                                <a href="blog.html">مدونة</a>
+                                            </li>
+                                            <li>
+                                                <a href="blog-2.html">مدونة 2</a>
+                                            </li>
+                                            <li>
+                                                <a href="blog-details.html">مدونة واحدة</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">الصفحات</a>
+                                        <ul>
+                                            <li>
+                                                <a href="contact.html">اتصل</a>
+                                            </li>
+                                            <li>
+                                                <a href="gallery-1.html">صالة عرض 1</a>
+                                            </li>
+                                            <li>
+                                                <a href="gallery-2.html">صالة عرض 2</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Templatepages" asp-page="shop">متجر</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Templatepages" asp-page="cart">عربة التسوق</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Templatepages" asp-page="checkout">الدفع</a>
+                                            </li>
+                                            <li>
+                                                <a href="faq.html">التعليمات</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Templatepages" asp-page="Error">404</a>
+                                            </li>
+                                            <li>
+                                                <a href="coming-soon.html">قريبا</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt-icons">
+                                <ul class="mti-list">
+                                    <li>
+                                        <span class="searchIcon">
+                                            <i class="flaticon-search"></i>
+                                        </span>
+                                        <div class="hSearchBox">
+                                            <form id="search" action="#" method="post">
+                                                <div class="search-o-group">
+                                                    <input type="text" name="search-terms" id="search-terms" placeholder="Enter search terms...">
+                                                    <button type="submit" class="osearch-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span id="cart"><i class="flaticon-shopping-cart"></i><span class="badge">02</span></span>
+                                        <div class="shopping-cart">
+                                            <div class="shopping-cart-header">
+                                                <div class="shopping-cart-total">
+                                                    <span class="lighter-text">Total:</span>
+                                                    <span class="main-color-text total">$461.15</span>
+                                                </div>
+                                            </div>
+
+                                            <ul class="shopping-cart-items">
+                                                <li>
+                                                    <img src="~/Admin/assets/img/food-menu/mpfood-1.jpg" alt="" />
+                                                    <span class="item-name">XMREDTREE</span>
+                                                    <span class="item-price">$49.50</span>
+                                                    <span class="item-quantity">Quantity: 01</span>
+                                                    <span class="cartProduct-remove">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <img src="~/Admin/assets/img/food-menu/mpfood-2.jpg" alt="" />
+                                                    <span class="item-name">XMWHREIN</span>
+                                                    <span class="item-price">$34.06</span>
+                                                    <span class="item-quantity">Quantity: 10</span>
+                                                    <span class="cartProduct-remove">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <img src="~/Admin/assets/img/food-menu/mpfood-3.jpg" alt="" />
+                                                    <span class="item-name">XMJBRR</span>
+                                                    <span class="item-price">$14.21</span>
+                                                    <span class="item-quantity">Quantity: 5</span>
+                                                    <span class="cartProduct-remove">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <a href="#" class="button">Checkout</a>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="footer-area">
+        <div class="footer-widget-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="f-widget footer-logo-info">
+                            <img src="~/Admin/assets/img/logo.png" alt="">
+                            <div class="fw-contact">
+                                <p>
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>Materfront avenue, street
+                                    2005F, USA
+                                </p>
+                                <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+1 888.387.5000</a>
+                                <a href="#">+1 888.387.5000</a>
+                                <a href="#" class="fmail"><i class="fa fa-envelope" aria-hidden="true"></i><span class="__cf_email__" data-cfemail="e1888f878ea18c848589848d91cf828e8c">[email&#160;protected]</span></a>
+                            </div>
+                        </div>
+                        <div class="footer-social-widget">
+                            <h4>تابعنا :</h4>
+                            <ul class="footer-social">
+                                <li><a href="https://twitter.com/voidcoders"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.facebook.com/voidcoders/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/voidcoders/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.linkedin.com/company/voidcoders/about/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="f-widget">
+                                    <h4>روابط مفيدة</h4>
+                                    <ul class="fw-links">
+                                        <li><a href="#">الصفحة الرئيسية</a></li>
+                                        <li><a href="#">حول</a></li>
+                                        <li><a href="#">حجز</a></li>
+                                        <li><a href="#">جهات الاتصال</a></li>
+                                        <li><a href="#">القائمة لدينا</a></li>
+                                        <li><a href="#">مدونة</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="f-widget">
+                                    <h4>إضافات</h4>
+                                    <ul class="fw-links">
+                                        <li><a href="#">طلبي</a></li>
+                                        <li><a href="#">الدفع</a></li>
+                                        <li><a href="#">تقديم الطعام</a></li>
+                                        <li><a href="#">مواقعنا</a></li>
+                                        <li><a href="#">سياسة خاصة</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="f-widget f-instawiget">
+                            <h4>انستغرام</h4>
+                            <ul class="fw-instagram">
+                                <li><a data-fancybox="gallery" href="../assets/img/gallery/insta-1.jpg"><img src="~/Admin/assets/img/gallery/insta-1.jpg" alt=""></a></li>
+                                <li><a data-fancybox="gallery" href="../assets/img/gallery/insta-2.jpg"><img src="~/Admin/assets/img/gallery/insta-2.jpg" alt=""></a></li>
+                                <li><a data-fancybox="gallery" href="../assets/img/gallery/insta-3.jpg"><img src="~/Admin/assets/img/gallery/insta-3.jpg" alt=""></a></li>
+                                <li><a data-fancybox="gallery" href="../assets/img/gallery/insta-4.jpg"><img src="~/Admin/assets/img/gallery/insta-4.jpg" alt=""></a></li>
+                                <li><a data-fancybox="gallery" href="../assets/img/gallery/insta-5.jpg"><img src="~/Admin/assets/img/gallery/insta-5.jpg" alt=""></a></li>
+                                <li><a data-fancybox="gallery" href="../assets/img/gallery/insta-6.jpg"><img src="~/Admin/assets/img/gallery/insta-6.jpg" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright-text">
+                            <p>
+                                © 2020 دافي! جميع الحقوق محفوظة
+                                <a href="#">VoidCoders</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    @*<script data-cfasync="false" src="~/Admin/../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>*@
+    <script src="~/Admin/assets/js/jquery-3.2.0.min.js"></script>
+    <script src="~/Admin/assets/js/jquery-ui.js"></script>
+
+    <script src="~/Admin/assets/js/jquery.smartmenus.min.js"></script>
+
+    <script src="~/Admin/assets/js/owl.carousel.min.js"></script>
+
+    <script src="~/Admin/assets/slick/slick.min.js"></script>
+
+    <script src="~/Admin/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Admin/assets/js/countdown.js"></script>
+    <script src="~/Admin/assets/js/jquery.scrollUp.js"></script>
+    <script src="~/Admin/assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/Admin/assets/js/jquery.fancybox.min.js"></script>
+    <script src="~/Admin/assets/js/wow.min.js"></script>
+
+    <script src="~/Admin/assets/YoutubeVideoModalPlugin/jquery.yu2fvl.js"></script>
+
+    <script src="~/Admin/assets/js/bootstrap.min.js"></script>
+
+    <script src="~/Admin/assets/js/theme.js"></script>
+</body>
+</html>

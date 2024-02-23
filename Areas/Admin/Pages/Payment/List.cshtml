@@ -1,0 +1,112 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Payment.ListModel
+@{
+    Layout = "~/Pages/Shared/_MainLayout.cshtml";
+}
+<script>
+    if (!document.getElementsByClassName('type')) {
+        document.getElementsByClassName('type').text = "sucsess"
+    }
+
+</script>
+<div class="container">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-header d-flex justify-content-between align-items-center">
+                    @sharedResource["Payments"]
+                    <a asp-page="Create" class="btn btn-primary">@sharedResource["Add"]  @sharedResource["Payment"]  </a>
+                </h2>
+            </div>
+            <div class="card-body">
+
+                @(Html.DevExtreme().DataGrid<Memories.Models.PaymentVM>()
+            //.ID("gridContainer")
+            .DataSource(
+            Model.Payments
+
+            //.Controller("PaymentModels")
+            //.LoadAction("Get")
+            //.Key("PaymentModelId")
+            )
+            .Columns(columns => {
+            @*columns.AddFor(m => m.Attachment)
+            .Width(100)
+            .AllowFiltering(false)
+            .AllowSorting(false)
+            .CellTemplate(@<text>
+                    <div>
+                        <img width="50" height="50" src="/Images/Brand/<%- value %>" alt="" />
+                    </div>
+                </text>).Caption(sharedResource["Picture"]);*@
+
+
+            @*columns.Add().Caption(sharedResource["Actions"]).Width(200).Alignment(HorizontalAlignment.Center).CellTemplate(@<text>
+
+                    <form method="post" asp-route-id="<%- data.BrandId %>">
+                        <input type="submit" value="false" />
+                    </form>
+                </text>);*@
+            columns.AddFor(m => m.TransactionDate).Caption(sharedResource["TransactionDate"]).DataType(GridColumnDataType.DateTime).Format("dd/MM HH:mm");
+            columns.AddFor(m => m.Gateway.Title).Caption(sharedResource["Gateway"]);
+            columns.AddFor(m => m.Amout).Caption(sharedResource["Amount"]);
+            columns.AddFor(m => m.Email).Caption(sharedResource["Email"]);
+            columns.AddFor(m => m.FirstName).Caption(sharedResource["First Name"]);
+            columns.AddFor(m => m.LastName).Caption(sharedResource["Last Name"]);
+            columns.AddFor(m => m.OrderNumber).Caption(sharedResource["Order Number"]);
+            columns.AddFor(m => m.PhoneNumber).Caption(sharedResource["Phone Number"]);
+            columns.AddFor(m => m.estimatedtime).Caption(sharedResource["Estimated Time"]);
+
+
+
+            columns.AddFor(m => m.PaymentStatusId).Caption(sharedResource["Status"]).Lookup(a=>a.DataSource(ds => ds.WebApi().Controller("LookUp").LoadAction("PaymentStatusLookup").Key("Value"))
+                            .ValueExpr("Value")
+                            .DisplayExpr("Text")
+                            );
+
+                @*columns.Add().Caption(sharedResource["Actions"]).Width(200).Alignment(HorizontalAlignment.Center).CellTemplate(@<text>
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                 <span >@Model.estimatedates </span>
+                    </div>
+                    </text>);*@
+
+            })
+              .Paging(paging => paging.PageSize(10))
+                        .Pager(pager =>
+                        {
+                            pager.Visible(true);
+                            pager.DisplayMode(GridPagerDisplayMode.Full);
+                            pager.ShowPageSizeSelector(true);
+                            pager.AllowedPageSizes(new JS("[5, 10, 'all']"));
+                            pager.ShowInfo(true);
+                            pager.ShowNavigationButtons(true);
+
+                        })
+                        .HeaderFilter(headerFilter => headerFilter.Visible(true)).ShowColumnLines(true)
+                        .ShowRowLines(true)
+                        .RowAlternationEnabled(true)
+                        .AllowColumnReordering(true)
+                        .ShowRowLines(true)
+                        .ShowBorders(true)
+                        .SearchPanel(searchPanel => searchPanel
+                        .Visible(true)
+                        .Width(240)
+                        .Placeholder(sharedResource["SearchTxt"]))
+                        .RemoteOperations(true)
+                        .RtlEnabled(bool.Parse(sharedResource["ArLang"]))
+            )
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var statuses = [{
+        "id": true, "name": "Success"
+    }, {
+        "id": false, "name": "Failed"
+    }
+    ];
+
+</script>

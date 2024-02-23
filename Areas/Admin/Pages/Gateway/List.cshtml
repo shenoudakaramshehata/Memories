@@ -1,0 +1,85 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Gateway.ListModel
+@{
+}
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-header d-flex justify-content-between align-items-center">
+                            @sharedResource["Brands"]
+                            <a asp-page="Create" class="btn btn-primary">@sharedResource["Add"]  @sharedResource["Payment"]  </a>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+
+
+
+
+                        @(Html.DevExtreme().DataGrid<Memories.Models.Gateway>()
+                  //.ID("gridContainer")
+                  .DataSource(ds => ds.Mvc()
+                  .Controller("Gateways")
+                  .LoadAction("Get")
+                  .Key("GateWayId")
+                  )
+                  .Columns(columns => {
+
+                  columns.AddFor(m => m.Title).Caption(sharedResource["Title"]);
+                  columns.AddFor(m => m.TestURL).Caption(sharedResource["TestURL"]);
+
+                  columns.AddFor(m => m.ApiKey).Caption(sharedResource["ApiKey"]);
+                  columns.AddFor(m => m.MerchantId).Caption(sharedResource["Merchan tId"]);
+                  columns.AddFor(m => m.UserName).Caption(sharedResource["UserName"]);
+
+
+                  columns.AddFor(m => m.Password).Caption(sharedResource["Password"]);
+
+
+                  columns.AddFor(m => m.Testmode).Caption(sharedResource["Test mode"]);
+
+                  columns.Add().Caption(sharedResource["Actions"]).Width(200).Alignment(HorizontalAlignment.Center).CellTemplate(@<text>
+
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <a class="btn btn-primary btn-sm"  href="/Admin/gateway/Details?id=<%- data.GateWayId %>"> <i class="fas fa-eye"></i> </a>
+                                <a class="btn btn-success btn-sm"  href="/Admin/gateway/Edit?id=<%- data.GateWayId %>">  <i class="fas fa-edit"></i> </a>
+
+                                 <a class="btn btn-danger btn-sm" href="/Admin/gateway/Delete?id=<%- data.GateWayId %>">  <i class="fas fa-trash"></i> </a>
+                            </div>
+                            </text>);
+
+                        })
+                          .Paging(paging => paging.PageSize(10))
+                        .Pager(pager =>
+                        {
+                            pager.Visible(true);
+                            pager.DisplayMode(GridPagerDisplayMode.Full);
+                            pager.ShowPageSizeSelector(true);
+                            pager.AllowedPageSizes(new JS("[5, 10, 'all']"));
+                            pager.ShowInfo(true);
+                            pager.ShowNavigationButtons(true);
+
+                        })
+                        .HeaderFilter(headerFilter => headerFilter.Visible(true)).ShowColumnLines(true)
+                        .ShowRowLines(true)
+                        .RowAlternationEnabled(true)
+                        .AllowColumnReordering(true)
+                        .ShowRowLines(true)
+                        .ShowBorders(true)
+                        .SearchPanel(searchPanel => searchPanel
+                        .Visible(true)
+                        .Width(240)
+                        .Placeholder(sharedResource["SearchTxt"]))
+                        .RemoteOperations(true)
+                        .RtlEnabled(bool.Parse(sharedResource["ArLang"]))
+                                        )
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

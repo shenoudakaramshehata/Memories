@@ -1,0 +1,176 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Users.EditProfileModel
+@using Microsoft.AspNetCore.Identity
+@using Memories.Data
+@inject UserManager<ApplicationUser> usermanager
+@{
+    Layout = "~/Pages/Shared/_TemplateLayout.cshtml";
+    var user = await usermanager.GetUserAsync(User);
+
+}
+<!-- Secondary Menu
+ ============================================= -->
+<div class="bg-primary">
+    <div class="container d-flex justify-content-center">
+        <ul class="nav nav-pills alternate nav-lg border-bottom-0">
+            <li class="nav-item"> <a class="nav-link" >@sharedResource["Account"]</a></li>
+            @*<li class="nav-item"> <a class="nav-link active" href="settings-security.html">Security</a></li>
+                <li class="nav-item"> <a class="nav-link" href="settings-payment-methods.html">Payment Methods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="settings-notifications.html">Notifications</a></li>*@
+        </ul>
+    </div>
+</div>
+<!-- Secondary Menu end -->
+<!-- Content
+============================================= -->
+<div id="content" class="py-4">
+    <div class="container">
+        <div class="row">
+                <!-- Left Panel
+    ============================================= -->
+            <aside class="col-lg-3">
+                <form method="post" enctype="multipart/form-data">
+
+
+                    <!-- Profile Details
+    =============================== -->
+                    <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <div class="profile-thumb mt-3 mb-4">
+                            @if (user.Photo == null)
+                            {
+                                <img class="rounded-circle" style="max-width: 100%;height:100%" src="~/Profile-Icon.png" alt="">
+                            }
+                            else
+                            {
+                                <img class="rounded-circle" style="max-width: 100%; height: 100%" src="~/@user.Photo" alt="">
+                            }
+
+                            <div class="profile-thumb-edit bg-primary text-white" data-bs-toggle="tooltip" title="@sharedResource[""]Change Profile Picture">
+                                <i class="fas fa-camera position-absolute"></i>
+                                <input type="file" name="file" class="custom-file-input" id="customFile">
+                            </div>
+
+                        </div>
+                        <p class="text-3 fw-500 mb-2">@sharedResource["Hello"], @user.Email</p>
+                        <p class="mb-2"><button type="submit" style="background:transparent;border:none" href="settings-profile.html" class="text-5 text-light" data-bs-toggle="tooltip" title="@sharedResource["Edit Profile Photo"]"><i class="fas fa-edit"></i></button></p>
+
+                    </div>
+                    <!-- Profile Details End -->
+                    <!-- Available Balance
+    =============================== -->
+                    <!--<div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <div class="text-17 text-light my-3"><i class="fas fa-wallet"></i></div>
+                        <h3 class="text-9 fw-400">$2956.00</h3>
+                        <p class="mb-2 text-muted opacity-8">Available Balance</p>
+                        <hr class="mx-n3">
+                        <div class="d-flex"><a href="withdraw-money.html" class="btn-link me-auto">Withdraw</a> <a href="deposit-money.html" class="btn-link ms-auto">Deposit</a></div>
+                    </div>-->
+                    <!-- Available Balance End -->
+                    <!-- Need Help?
+    =============================== -->
+                    <!--<div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <div class="text-17 text-light my-3"><i class="fas fa-comments"></i></div>
+                        <h3 class="text-5 fw-400 my-4">Need Help?</h3>
+                        <p class="text-muted opacity-8 mb-4">
+                            Have questions or concerns regrading your account?<br>
+                            Our experts are here to help!.
+                        </p>
+                        <div class="d-grid"><a href="#" class="btn btn-primary">Chate with Us</a></div>
+                    </div>-->
+                </form>
+                    <!-- Need Help? End -->
+            </aside>
+           
+        <!-- Left Panel End -->
+        <!-- Middle Panel
+        ============================================= -->
+        <div class="col-lg-9">
+
+            <!-- Password
+            ============================================= -->
+            <div class="bg-white shadow-sm rounded p-4 mb-4">
+                <h3 class="text-5 fw-400 d-flex align-items-center mb-4">@sharedResource["Password"]<a href="#change-password" data-bs-toggle="modal" class="ms-auto text-2 text-uppercase btn-link"><span class="me-1"><i class="fas fa-edit"></i></span>@sharedResource["Change"]</a></h3>
+                <hr class="mx-n4 mb-4">
+                <p class="text-3">@sharedResource["Update your password"]. - <span class="text-muted">@sharedResource["Last changed"]:@user.LastChangePassword.Date.ToString("dd,MMMM,yyyy")  </span></p>
+            </div>
+            <!-- Edit Details Modal
+            ================================== -->
+            <div id="change-password" class="modal fade " role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-400">@sharedResource["Change Password"]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <form id="changePassword" asp-page-handler="Changepassword" method="post">
+                                <div class="mb-3">
+                                    <label for="existingPassword" class="form-label">@sharedResource["Current Password"]</label>
+                                    <input type="text" class="form-control" asp-for="@Model.ProfileVM.CurrentPassword" data-bv-field="existingpassword" id="existingPassword" required placeholder="@sharedResource["Enter Current Password"]">
+                                    <span asp-validation-for="@Model.ProfileVM.CurrentPassword" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">@sharedResource["New Password"]</label>
+                                    <input type="text" class="form-control" asp-for="@Model.ProfileVM.NewPassword" data-bv-field="newpassword" id="newPassword" required placeholder="@sharedResource["Enter New Password"]">
+                                    <span asp-validation-for="@Model.ProfileVM.NewPassword" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">@sharedResource["Confirm New Password"]</label>
+                                    <input type="text" class="form-control" asp-for="@Model.ProfileVM.ConfirmNewPassword" data-bv-field="confirmgpassword" id="confirmPassword" required placeholder="@sharedResource["Enter Confirm New Password"]">
+                                    <span asp-validation-for="@Model.ProfileVM.ConfirmNewPassword" class="text-danger"></span>
+
+                                </div>
+                                <div class="d-grid mt-4"><button class="btn btn-primary" type="submit">@sharedResource["Update Password"]</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="bg-white shadow-sm rounded p-4 mb-4">
+                <h3 class="text-5 fw-400 d-flex align-items-center mb-4">@sharedResource["Email"]<a href="#change-Email" data-bs-toggle="modal" class="ms-auto text-2 text-uppercase btn-link"><span class="me-1"><i class="fas fa-edit"></i></span>@sharedResource["Change"]</a></h3>
+                <hr class="mx-n4 mb-4">
+                <p class="text-3">@user.Email . <span class="text-muted"></span></p>
+            </div>
+
+            <div id="change-Email" class="modal fade " role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-400">@sharedResource["Change Email"]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <form id="changeEmail" asp-page-handler="ChangeEmail" method="post">
+                                <div class="mb-3">
+                                    <label for="newEmail" class="form-label">@sharedResource["New Email"]</label>
+                                    <input type="text" class="form-control" asp-for="@Model.ProfileVM.NewEmail" data-bv-field="newEmail" id="newEmail" required placeholder="@sharedResource["Enter New Email"]">
+                                    <span asp-validation-for="@Model.ProfileVM.NewEmail" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmEmail" class="form-label">@sharedResource["Confirm New Email"]</label>
+                                    <input type="text" class="form-control" asp-for="@Model.ProfileVM.ConfirmNewEmail" data-bv-field="confirmEmail" id="confirmEmail" required placeholder="@sharedResource["Enter Confirm New Email"]">
+                                    <span asp-validation-for="@Model.ProfileVM.ConfirmNewEmail" class="text-danger"></span>
+                                </div>
+                                <div class="d-grid mt-4"><button class="btn btn-primary" type="submit">@sharedResource["Update Email"]</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Middle Panel End -->
+    </div>
+</div>
+</div>
+@await Component.InvokeAsync("NToastNotify")
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

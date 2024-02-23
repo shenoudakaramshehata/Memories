@@ -1,0 +1,61 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Gateway.EditModel
+@{
+}
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-header d-flex justify-content-between align-items-center">
+                            @sharedResource["Edit"]  @sharedResource["Item"]
+                            <a asp-page="Index" class="btn btn-primary"> @sharedResource["Back"]</a>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <br />
+                        <form id="form" method="post" >
+
+                            @(Html.DevExtreme().Form<Memories.Models.Gateway>()
+                                 .FormData(Model.gateway)
+        .Items(items =>
+        {
+            //items.AddSimpleFor(m => m.GateWayId);
+            items.AddSimpleFor(m => m.Title).IsRequired(true).Label(k => k.Text(sharedResource["Title"]));
+            items.AddSimpleFor(m => m.TestURL).IsRequired(true).Label(k => k.Text(sharedResource["TestURL"]));
+            items.AddSimpleFor(m => m.ApiKey).IsRequired(true).Label(k => k.Text(sharedResource["ApiKey"]));
+            items.AddSimpleFor(m => m.MerchantId).IsRequired(true).Label(k => k.Text(sharedResource["Merchan tId"]));
+            items.AddSimpleFor(m => m.UserName).IsRequired(true).Label(k => k.Text(sharedResource["UserName"]));
+            items.AddSimpleFor(m => m.Password).IsRequired(true).Label(k => k.Text(sharedResource["Password"]));
+            items.AddSimpleFor(m => m.Testmode).IsRequired(true).Label(k => k.Text(sharedResource["Test mode"]));
+
+
+
+
+
+        })
+
+
+)
+
+                            <div class="button invers" style="margin-top:10px">
+
+                                @(Html.DevExtreme().Button()
+                .ID("button")
+                .Text(sharedResource["Save"])
+                .Type(ButtonType.Success)
+                .UseSubmitBehavior(true)
+
+                )
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

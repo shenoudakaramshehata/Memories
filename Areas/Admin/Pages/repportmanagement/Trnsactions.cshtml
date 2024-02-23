@@ -1,0 +1,214 @@
+﻿
+
+
+@page
+@model Memories.Areas.Admin.Pages.repportmanagement.Trnsactions
+@{ Layout = "~/Pages/Shared/_MainLayout.cshtml";
+                var priorities = new[] { "Success", "Failed" }; }
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Admin/assets/css/slim.css">
+    <title></title>
+    <style>
+        .dx-button {
+            color: black !important;
+            background: #f3e063 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slim-mainpanel p-4">
+            <div class="container">
+                <div class="slim-pageheader">
+                </div><!-- slim-pageheader -->
+
+
+
+                <div class="row row-sm row-timeline">
+                    <div class="col-lg-3 p-3 mg-lg-t-0">
+                        <div class="card pd-20 mg-t-40">
+                            <label class="slim-card-title">@sharedResource["Filter"]</label>
+                            <div class="post-group">
+                                <form method="post">
+                                    <div class="row">
+                                        <div class="col-md-12" id="radiobtn">
+                                            <label> @sharedResource["All"]</label>&nbsp;&nbsp;<input onclick="CHECKBOXBTN()" id="ch3" type="checkbox" asp-for="@Model.filtermodel.all" />
+                                        </div>
+                                        @*<div class="col-md-12" id="radiobtn">
+                                            <label for="ch1"> @sharedResource["Success"]</label>&nbsp;<input onclick="radio1()" asp-for="@Model.filtermodel.radio" value="true" type="radio" id="ch1" />
+                                            &nbsp;<label for="ch2"> @sharedResource["Failed"]</label> <input onclick="radio2()" asp-for="@Model.filtermodel.radio" value="false" type="radio" id="ch2" />
+                                        </div>*@
+                                        <div class="col-lg-12" id="FromID">
+                                            <div class="form-group">
+                                                <label>@sharedResource["From"]<span class="tx-danger">*</span></label>
+                                                @(Html.DevExtreme().DateBoxFor(e=>e.filtermodel.FromDate)
+                                    .Type(DateBoxType.Date)
+
+                                    )
+                                                <div class="text text-danger">@Html.ValidationMessage("FromandToError")</div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12" id="FromID2">
+                                            <div class="form-group">
+                                                <label>@sharedResource["To"]<span class="tx-danger">*</span></label>
+                                                @(Html.DevExtreme().DateBoxFor(e=>e.filtermodel.ToDate)
+                                    .Type(DateBoxType.Date)
+
+                                    )
+                                                <div class="text text-danger">@Html.ValidationMessage("FromandToError")</div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12" id="FromID2">
+                                            <div class="form-group">
+                                                <label>@sharedResource["Gate Way"]<span class="tx-danger">*</span></label>
+                                                @(Html.DevExtreme().LookupFor(e=>e.filtermodel.GateID)
+
+                                    .DataSource(ds => ds.WebApi().Controller("LookUp").LoadAction("GateWaysLookup").Key("Value"))
+                                    .ValueExpr("Value")
+                                    .DisplayExpr("Text").Placeholder(sharedResource["Select Gate Way"])
+                                    .ShowClearButton(true)
+                                    .ClearButtonText(sharedResource["Clear"])
+                                    .CancelButtonText(sharedResource["Cancel"])
+                                    .SearchPlaceholder(sharedResource["searching"]).RtlEnabled(bool.Parse(sharedResource["ArLang"]))
+                                    )
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12" id="FromID2">
+                                            <div class="form-group">
+                                                <label>@sharedResource["Transaction Status"]<span class="tx-danger">*</span></label>
+                                                @(Html.DevExtreme().LookupFor(e=>e.filtermodel.PaymentSatusId)
+
+                                    .DataSource(ds => ds.WebApi().Controller("LookUp").LoadAction("PaymentStatusLookup").Key("Value"))
+                                    .ValueExpr("Value")
+                                    .DisplayExpr("Text").Placeholder(sharedResource["Select Status"])
+                                    .ShowClearButton(true)
+                                    .ClearButtonText(sharedResource["Clear"])
+                                    .CancelButtonText(sharedResource["Cancel"])
+                                    .SearchPlaceholder(sharedResource["searching"]).RtlEnabled(bool.Parse(sharedResource["ArLang"]))
+                                    )
+
+                                            </div>
+                                        </div>
+                                        <input style="background-color: #f3e063; color: black" type="submit" value="@sharedResource["Submit"]" />
+                                    </div>
+                                </form>
+
+                                @*@using (Html.BeginForm(FormMethod.Post))@(Html.DevExtreme().Form<Memories.Models.FilterModel>
+                    ()
+                    .FormData(Model.filtermodel)
+                    .LabelMode(FormLabelMode.Outside)
+                    .LabelLocation(FormLabelLocation.Top)
+                    .Items(items => {
+                        items.AddSimpleFor(m => m.radio).Label(l => l.Text(sharedResource["Radio Button"])).IsRequired(false).Editor(e => e.RadioGroup().Items(priorities)
+                        .Layout(Orientation.Horizontal));
+
+                        items.AddSimpleFor(m => m.FromDate).Label(l => l.Text(sharedResource["from"]));
+                        items.AddSimpleFor(m => m.ToDate).Label(l => l.Text(sharedResource["to"]));
+                        items.AddSimpleFor(m => m.GateID).Label(l => l.Text(sharedResource["Gate Way"])).IsRequired(false)
+                        .Editor(e => e
+                        .Lookup()
+                        .DataSource(ds => ds.WebApi().Controller("LookUp").LoadAction("GateWaysLookup").Key("Value"))
+                        .ValueExpr("Value")
+                        .DisplayExpr("Text").Placeholder(sharedResource["Select Gate Way"])
+                        .ShowClearButton(true)
+                        .ClearButtonText(sharedResource["Clear"])
+                        .CancelButtonText(sharedResource["Cancel"])
+                        .SearchPlaceholder(sharedResource["searching"])
+                        );
+
+
+
+                        items.AddButton()
+                        .HorizontalAlignment(HorizontalAlignment.Left)
+                        .ButtonOptions(b => b.Text(sharedResource["submit"])
+                        .Type(ButtonType.Success)
+                        .UseSubmitBehavior(true)
+                        );
+                    })
+                    )*@
+                            </div><!-- post-group -->
+                        </div><!-- card -->
+                    </div>
+
+                    <div class="col-lg-9">
+
+                        <div class="card pd-30">
+                            <div class="timeline-group">
+                                @using Memories.Reports
+
+                                <link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+
+                                <script src="~/js/viewer.part.bundle.js"></script>
+
+                                @Html.DevExpress().WebDocumentViewer("DocumentViewer").Height("1000px").Bind(Model.Report)
+                            </div><!-- timeline-group -->
+                        </div><!-- card -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!-- col-3 -->
+<script>
+    //var button1 = document.getElementById('ch1');
+    //var button2 = document.getElementById('ch2');
+    //const formm1 = document.getElementById('FromID');
+    //const formm2 = document.getElementById('FromID2');
+    //if (button1.checked == true) {
+    //    // 👇 this SHOWS the form
+    //    formm1.style.display = 'flex';
+    //    formm2.style.display = 'flex';
+
+    //}
+    //else if (button2.checked == true) {
+    //    // 👇 this HIDES the form
+    //    formm1.style.display = 'none';
+    //    formm2.style.display = 'none';
+    //}
+    //function myFunction() {
+    //    var btn1 = document.getElementById('ch1');
+    //    var btn2 = document.getElementById('ch2');
+
+    //    const form1 = document.getElementById('FromID');
+    //    const form2 = document.getElementById('FromID2');
+
+    //    if (btn1.checked == true) {
+    //        // 👇 this SHOWS the form
+    //        form1.style.display = 'flex';
+    //        form2.style.display = 'flex';
+
+    //    }
+    //    else if (btn2.checked == true) {
+    //        // 👇 this HIDES the form
+    //        form1.style.display = 'none';
+    //        form2.style.display = 'none';
+    //    }
+    //}
+    function CHECKBOXBTN() {
+        if (document.getElementById('ch3').checked == true) {
+            document.getElementById('ch1').checked = false;
+            document.getElementById('ch2').checked = false;
+        }
+    }
+    function radio1() {
+        if (document.getElementById('ch1').checked == true) {
+            document.getElementById('ch3').checked = false;
+
+        }
+    }
+    function radio2() {
+        if (document.getElementById('ch2').checked == true) {
+            document.getElementById('ch3').checked = false;
+
+        }
+    }
+
+</script>

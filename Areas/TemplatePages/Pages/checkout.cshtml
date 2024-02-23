@@ -1,0 +1,124 @@
+﻿@page
+@model Memories.Pages.checkoutModel
+@{
+//Layout = "_MemoriesLayout";
+
+}
+<body>
+
+   
+    <section class="breadcrumb-area">
+        <img src="~/Admin/assets/img/bg/innerpage-breadcrumb-bg-1.jpg" alt="" class="breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-box">
+                        <h3 class="page-title">الدفع</h3>
+                        <ul class="breadcrumb-list">
+                            <li><a href="index">الصفحة الرئيسية</a></li>
+                            <li>الدفع</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="checkout-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="checkout-wrapper">
+                        <form action="#">
+                            <div class="coupon-area">
+                                <p>هل لديك قسيمة؟ <input type="text" id="coupon" name="coupon" placeholder="انقر هنا لإدخال الرمز الخاص بك"></p>
+                            </div>
+                            <h3>تفاصيل الفاتورة</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="fname">الاسم الاول<span>*</span></label>
+                                    <input type="text" class="df-control" id="fname" name="fname" placeholder=" ">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lname">الكنية<span>*</span></label>
+                                    <input type="text" class="df-control" id="lname" name="lname" placeholder=" ">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="cname">اسم الشركة (اختياري)<span>*</span></label>
+                                    <input type="text" class="df-control" id="cname" name="cname" placeholder=" ">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="country">بلد<span>*</span></label>
+                                    <input type="text" class="df-control" id="country" name="country" placeholder="بنغلاديش">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="streetaddress">عنوان الشارع<span>*</span></label>
+                                    <input type="text" class="df-control" id="streetaddress" name="streetaddress" placeholder="رقم المنزل واسم الشارع">
+                                    <input type="text" class="df-control" id="aptaddress" name="aptaddress" placeholder="شقة، جناح، وحدة الخ (اختياري)">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="city">المدينة / المدينة <span>*</span></label>
+                                    <input type="text" class="df-control" id="city" name="city" placeholder=" ">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="district">منطقة<span>*</span></label>
+                                    <select name="district" id="district" class="df-control">
+                                        <option value="0">حدد اختيارا</option>
+                                        <option value="1">Dhaka</option>
+                                        <option value="2">Cumilla</option>
+                                        <option value="3">Jessore</option>
+                                        <option value="4">Bogra</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="pcode">الرمز البريدي (ZIP) (اختياري)<span>*</span></label>
+                                    <input type="text" class="df-control" id="pcode" name="pcode" placeholder=" ">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="phone">هاتف<span>*</span></label>
+                                    <input type="text" class="df-control" id="phone" name="phone" placeholder=" ">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="phone">البريد الإلكتروني<span>*</span></label>
+                                    <input type="email" class="df-control" id="email" name="email" placeholder=" ">
+                                </div>
+                            </div>
+                            <h3>طلبك</h3>
+                            <div class="checkout-payment-table-box">
+                                <table class="checkout-table">
+                                    <tr>
+                                        <td>المنتج</td>
+                                        <td>مجموع</td>
+                                    </tr>
+                                    <tr>
+                                        <td>دجاج مقلي</td>
+                                        <td>$20.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>المجموع الفرعي</td>
+                                        <td>$20.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الشحن</td>
+                                        <td>الشحن مجانا</td>
+                                    </tr>
+                                    <tr>
+                                        <td>مجموع</td>
+                                        <td>$20.00</td>
+                                    </tr>
+                                </table>
+                                <p>يرجى إرسال شيك إلى اسم المتجر ، شارع المتجر ، متجر المدينة ، ولاية / مقاطعة المتجر ، الرمز البريدي للمتجر.</p>
+                            </div>
+                            <input type="submit" class="bfs-btn" value="احجز طاولة">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+

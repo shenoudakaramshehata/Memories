@@ -1,0 +1,42 @@
+﻿@page
+@model Memories.Areas.TemplatePages.Pages.ErrorModel
+@{
+//Layout = "_MemoriesLayout";
+}
+<body>
+    <section class="breadcrumb-area">
+        <img src="~/Admin/assets/img/bg/innerpage-breadcrumb-bg-1.jpg" alt="" class="breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-box">
+                        <h3 class="page-title">404</h3>
+                        <ul class="breadcrumb-list">
+                            <li><a href="index.html">الصفحة الرئيسية</a></li>
+                            <li>خطأ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="error-page-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="error-wrapper">
+                        <div class="ew-img">
+                            <img src="~/Admin/assets/img/section-img/404.png" alt="">
+                        </div>
+                        <div class="ew-text">
+                            <h3>عذرًا ، لم نتمكن من العثور على هذه الصفحة!</h3>
+                            <a asp-page="Index" class="btn-style-a">العودة إلى الصفحة الرئيسية</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

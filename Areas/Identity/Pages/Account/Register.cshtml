@@ -1,0 +1,231 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+<link href="images/favicon.png" rel="icon" />
+<title>@sharedResource["Payyed - Money Transfer and Online Payments HTML Template"] </title>
+<meta name="description" content="@sharedResource["This professional design html template is for build a Money Transfer and online payments website"] .">
+<meta name="author" content="harnishdesign.net">
+
+<!-- Web Fonts
+============================================= -->
+<link rel="stylesheet" href="/files/css/css2.css">
+
+<!-- Stylesheet
+============================================= -->
+<link rel="stylesheet" type="text/css" href="/files/vendor/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/files/vendor/font-awesome/css/all.min.css" />
+<link rel="stylesheet" type="text/css" href="/files/css/stylesheet.css" />
+<!-- Colors Css -->
+<link id="color-switcher" type="text/css" rel="stylesheet" href="#" />
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div data-loader="dual-ring"></div>
+</div>
+<!-- Preloader End -->
+
+<div id="main-wrapper" class="min-vh-100 d-flex flex-column">
+  <!-- SignUp Form
+  ============================================= -->
+  <div class="container my-auto">
+    <div class="row g-0">
+      <div class="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4 m-auto py-5">
+        <div class="logo text-center"> <a href="index.html" title="@sharedResource["Payyed - HTML Template"] "><img src="/files/images/logo-lg.png" alt="Payyed"></a> </div>
+        <p class="lead text-center mb-4">@sharedResource["Your information is safe with us"] .</p>
+        <form id="loginForm" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+          <div class="vertical-input-group">
+            
+            <div class="input-group">
+              <input type="email" class="form-control"asp-for="Input.Email" id="emailAddress" required placeholder="@sharedResource["Your Email"]">
+            </div>
+            <div class="input-group">
+              <input type="number" class="form-control" asp-for="Input.PhoneNumber" id="loginPassword" required placeholder="@sharedResource["PhoneNumber"]">
+            </div>
+            <div class="input-group">
+              <input type="password" class="form-control" asp-for="Input.Password" id="loginPassword" required placeholder="@sharedResource["Password"]">
+            </div>
+            <div class="input-group">
+              <input type="password" class="form-control" asp-for="Input.ConfirmPassword" id="loginPassword" required placeholder="@sharedResource["Confirm Password"]">
+            </div>
+          </div>
+          <div class="d-grid my-4"><button class="btn btn-primary shadow-none" type="submit">@sharedResource["Sign Up"]</button></div>
+        </form>
+        <p class="text-3 text-center text-muted">@sharedResource["Already have an account"]? <a class="btn-link" href="Login">@sharedResource["Log In"]</a></p>
+      </div>
+    </div>
+  </div>
+  <!-- SignUp Form End -->
+  
+  <!-- Footer
+  ============================================= -->
+  <div class="container-fluid bg-white py-2">
+    <p class="text-center text-muted mb-0">@sharedResource["Copyright &copy; 2022"] <a href="#">@sharedResource["Payyed"]</a>. .@sharedResource[""]</p>
+  </div>
+  
+</div>
+
+<!-- Back to Top
+============================================= --> 
+<a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+
+<!-- Styles Switcher -->
+<div id="styles-switcher" class="left">
+  <h2 class="text-3">@sharedResource["Color Switcher"]</h2>
+  <hr>
+  <ul>
+    <li class="blue" data-bs-toggle="tooltip" title="Blue" data-path="css/color-blue.css"></li>
+	<li class="indigo" data-bs-toggle="tooltip" title="Indigo" data-path="css/color-indigo.css"></li>
+    <li class="purple" data-bs-toggle="tooltip" title="Purple" data-path="css/color-purple.css"></li>
+	<li class="pink" data-bs-toggle="tooltip" title="Pink" data-path="css/color-pink.css"></li>
+	<li class="red" data-bs-toggle="tooltip" title="Red" data-path="css/color-red.css"></li>
+    <li class="orange" data-bs-toggle="tooltip" title="Orange" data-path="css/color-orange.css"></li>
+	<li class="yellow" data-bs-toggle="tooltip" title="Yellow" data-path="css/color-yellow.css"></li>
+	<li class="teal" data-bs-toggle="tooltip" title="Teal" data-path="css/color-teal.css"></li>
+    <li class="cyan" data-bs-toggle="tooltip" title="Cyan" data-path="css/color-cyan.css"></li>
+    <li class="brown" data-bs-toggle="tooltip" title="Brown" data-path="css/color-brown.css"></li>
+  </ul>
+  <button class="btn btn-dark btn-sm border-0 fw-400 rounded-0 shadow-none" data-bs-toggle="tooltip" title="Green" id="reset-color">@sharedResource["Reset Default"]</button>
+  <button class="btn switcher-toggle"><i class="fas fa-cog"></i></button>
+</div>
+<!-- Styles Switcher End --> 
+
+<!-- Script --> 
+<script src="/files/vendor/jquery/jquery.min.js"></script> 
+<script src="/files/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<!-- Style Switcher --> 
+<script src="/files/js/switcher.min.js"></script> 
+<script src="/files/js/theme.js"></script>
+</body>
+</html>
+
+
+@*
+@using Microsoft.AspNetCore.Localization;
+
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from themesbrand.com/admiria/layouts/vertical/pages-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 13:10:17 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <title>@sharedResource["Register"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Admin/assets/images/favicon.ico">
+
+    @{
+        var locale = Request.HttpContext.Features.Get<IRequestCultureFeature>();
+        var BrowserCulture = locale.RequestCulture.UICulture.ToString();
+        //English
+        if (BrowserCulture == "en-US")
+        {
+            <style>
+                html {
+                    direction: ltr !important;
+                }
+            </style>
+            
+            <link href="@Url.Content("~/Admin/assets/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+            <link href="@Url.Content("~/Admin/assets/css/icons.min.css")" rel="stylesheet" type="text/css" />
+            <link href="@Url.Content("~/Admin/assets/css/app.min.css")" rel="stylesheet" type="text/css" />
+
+
+        }
+        //Arabic
+        else
+        {
+            <style>
+                html {
+                    direction: rtl !important;
+                }
+            </style>
+            <link href="@Url.Content("~/Admin/assets/css/bootstrap-rtl.min.css")" rel="stylesheet" type="text/css" />
+            <link href="@Url.Content("~/Admin/assets/css/icons.min.css")" rel="stylesheet" type="text/css" />
+            <link href="@Url.Content("~/Admin/assets/css/app-rtl.min.css")" rel="stylesheet" type="text/css" />
+
+        }
+
+    }
+    <link href="~/Admin/assets/css/custom.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+    <!-- Begin page -->
+    <div class="accountbg" style="background: url('../../../../Admin/assets/images/bg.jpg');background-size: cover;background-position: center;"></div>
+    <div class="account-pages mt-5 pt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-5 col-xl-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center mt-4">
+                                <div class="mb-3">
+                                    <a href="index.html"><img src="~/Admin/assets/images/logo.png" height="30" alt="logo"></a>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <h4 class="font-size-18 mt-2 text-center">@sharedResource["Welcome_Back"] !</h4>
+                                <p class="text-muted text-center mb-4"> @sharedResource["Sign_in"]</p>
+
+                                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    <h4>Create a new account.</h4>
+                                    <hr />
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Email"></label>
+                                        <input asp-for="Input.Email" class="form-control" />
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Password"></label>
+                                        <input asp-for="Input.Password" class="form-control" />
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.ConfirmPassword"></label>
+                                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                    <br />
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
+                            </div>
+                          
+                        </div>
+
+                        <!-- JAVASCRIPT -->
+                        <script src="~/Admin/assets/libs/jquery/jquery.min.js"></script>
+                        <script src="~/Admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+                        <script src="~/Admin/assets/libs/metismenu/metisMenu.min.js"></script>
+                        <script src="~/Admin/assets/libs/simplebar/simplebar.min.js"></script>
+                        <script src="~/Admin/assets/libs/node-waves/waves.min.js"></script>
+
+                        <script src="~/Admin/assets/js/app.js"></script>
+                        @section Scripts {
+                            <partial name="_ValidationScriptsPartial" />
+                        }
+</body>
+
+<!-- Mirrored from themesbrand.com/admiria/layouts/vertical/pages-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Dec 2021 13:10:17 GMT -->
+</html>
+*@

@@ -1,0 +1,58 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Gateway.CreateModel
+@{
+}
+
+<style>
+    .dx-tagbox-popup-wrapper .dx-list-select-all {
+        display: flex;
+    }
+</style>
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-header d-flex justify-content-between align-items-center">
+                            @sharedResource["Add"]  @sharedResource["Payment"]
+                            <a asp-page="List" class="btn btn-primary"> @sharedResource["Back"]</a>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <br />
+                        <form id="form" method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @using (Html.BeginForm())
+                            {
+                                @*@Html.AntiForgeryToken();
+            @Html.Hidden("GetwaysIds", "");*@
+                                @(Html.DevExtreme().Form<Memories.Models.Gateway>()
+                        .Items(items =>
+                        {
+                        items.AddSimpleFor(m => m.Title).IsRequired(true).Label(k => k.Text(sharedResource["Title"]));
+                        items.AddSimpleFor(m => m.TestURL).IsRequired(true).Label(k => k.Text(sharedResource["TestURL"]));
+                        items.AddSimpleFor(m => m.ApiKey).IsRequired(true).Label(k => k.Text(sharedResource["ApiKey"]));
+                        items.AddSimpleFor(m => m.MerchantId).IsRequired(true).Label(k => k.Text(sharedResource["Merchant Id"])).Editor(e => e.TextBox().Value(null));
+                        items.AddSimpleFor(m => m.UserName).IsRequired(true).Label(k => k.Text(sharedResource["UserName"]));
+                        items.AddSimpleFor(m => m.Password).IsRequired(true).Label(k => k.Text(sharedResource["Password"]));
+                        items.AddSimpleFor(m => m.Testmode).IsRequired(true).Label(k => k.Text(sharedResource["Test mode"])).Editor(e => e.TextBox().Value(null));
+                        items.AddButton()
+                        .ColSpan(3)
+                        .HorizontalAlignment(HorizontalAlignment.Right)
+                        .ButtonOptions(b => b.Text(sharedResource["Save"])
+                        .Type(ButtonType.Success)
+                        .UseSubmitBehavior(true)).CssClass("invers");
+        })
+)
+
+
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

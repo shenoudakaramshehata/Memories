@@ -1,0 +1,245 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Payment.TransactionModel
+@{
+    Layout = "~/Pages/Shared/_MainLayout.cshtml";
+}
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+    /*body{
+                  text-align: center;
+                  font-family: 'Rubik', sans-serif;
+                  align-content: center;
+                  align-items: center;
+                  align-self: center;
+                  background: linear-gradient(45deg, #b95ce4, #4f29cd) no-repeat center center fixed;
+                  -webkit-background-size: cover;
+                  -moz-background-size: cover;
+                  -o-background-size: cover;
+                  background-size: 400% 400%;
+                  display: flex;
+                  flex-wrap: wrap;
+                  animation: bgi 14s ease infinite;
+                  transition: 5s;
+                }
+                .container{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  max-width: 1200px;
+                  flex-wrap: wrap;
+                  padding: 40px 0;
+                }*/
+    .container .card {
+        position: relative;
+        width: 300px;
+        height: 243px;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        margin-left: 50px;
+        margin-top: 70px
+    }
+
+        .container .card .box {
+            position: absolute;
+            background: #ebf5fc;
+            border-radius: 15px;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05), inset -5px -5px 5px rgba(255, 255, 255, 0.5), 5px 5px 5px rgba(0, 0, 0, 0.05), -5px -5px 5px rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .5s;
+            color: gray;
+        }
+
+        .container .card:hover .box {
+            transform: translateY(-50px);
+            transition: 5px;
+            box-shadow: unset;
+        }
+
+        .container .card .box a {
+            position: relative;
+            display: inline;
+            padding: 8px 20px;
+            background: #03a9f4;
+            text-decoration: None;
+            border-radius: 15px;
+            color: #fff;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .container .card:hover .box a {
+            background: #ff568f;
+        }
+
+    @@keyframes bgi {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+<div class="container">
+<div class="container row">
+    <div class="card col-lg-4">
+        <div class="box">
+            <div class="content">
+                <h2>@sharedResource["Total Generated"] </h2>
+                <p>KWD&nbsp;@Model.totalgen</p>
+                <p>KWD&nbsp;@Model.totalgen</p>
+            </div>
+        </div>
+    </div>
+    <div class="card col-lg-3 col-md-4">
+        <div class="box">
+            <div class="content">
+                <h2>@sharedResource["Total Recieved"]</h2>
+                <p>KWD&nbsp;@Model.totalRecived</p>
+            </div>
+        </div>
+    </div>
+    <div class="card col-lg-4">
+        <div class="box">
+            <div class="content">
+                <h2>@sharedResource["Net Balance"]</h2>
+                <p>KWD&nbsp;@Model.Net</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+        <div class="table-responsive">
+            <div class="card-header">
+                <h2 class="card-header d-flex justify-content-between align-items-center">
+                    @sharedResource["Transactions"]
+                    @*<a asp-page="Create" class="btn btn-primary">@sharedResource["Add"]  @sharedResource["Payment"]  </a>*@
+                </h2>
+            </div>
+            @(Html.DevExtreme().DataGrid<Memories.Models.PaymentModel>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("PaymentModels")
+            .LoadAction("Get")
+
+            .DeleteAction("Delete")
+            .Key("PaymentModelId")
+            
+            )
+            .RemoteOperations(true)
+            .ShowBorders(true)
+            .HeaderFilter(headerFilter => headerFilter.Visible(true))
+
+            .ColumnChooser(cc => cc.Enabled(true))
+            .ColumnAutoWidth(true)
+            .WordWrapEnabled(true)
+            .ShowBorders(true)
+            .Paging(p => p.PageSize(10))
+            .Pager(p => p.ShowPageSizeSelector(true).AllowedPageSizes(new[] { 10, 20, 40, 80 }))
+            .SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true).Placeholder(sharedResource["searching"]))
+            .FilterRow(filterRow => filterRow
+            .Visible(true)
+            .ApplyFilter(GridApplyFilterMode.Auto)
+            )
+            .HeaderFilter(headerFilter => headerFilter.Visible(true))
+            .Columns(columns => {
+            columns.Add().Caption(sharedResource["Actions"]).Width(200).Alignment(HorizontalAlignment.Center).CellTemplate(@<text>
+
+                    <form method="post">
+                        <input hidden name="id" value="<%- data.PaymentModelId %>" />
+                        <input class="btn btn-danger" type="submit" value="@sharedResource["Delete"]" />
+                    </form>
+                </text>);
+            columns.AddFor(m => m.Amout).Caption(sharedResource["Amout"]);
+
+            columns.AddFor(m => m.Email).Caption(sharedResource["Email"]);
+
+            columns.AddFor(m => m.FirstName).Caption(sharedResource["First Name"]);
+
+            columns.AddFor(m => m.LastName).Caption(sharedResource["Last Name"]);
+
+            columns.AddFor(m => m.PhoneNumber).Caption(sharedResource["PhoneNumber"]);
+
+            //columns.AddFor(m => m.GateWayId).Lookup(lookup => lookup
+            //    .DataSource(ds => ds.WebApi().Controller("PaymentModels").LoadAction("GatewaysLookup").Key("Value"))
+            //    .ValueExpr("Value")
+            //    .DisplayExpr("Text")
+            //);
+
+            columns.AddFor(m => m.OrderNumber).Caption(sharedResource["Order Number"]);
+
+            columns.AddFor(m => m.Remarks).Caption(sharedResource["Remarks"]);
+
+            //columns.AddFor(m => m.Attachment);
+
+            //columns.AddFor(m => m.Userid);
+
+            //columns.AddFor(m => m.issuccess);
+
+            //columns.AddFor(m => m.payment_type);
+
+            //columns.AddFor(m => m.PaymentID);
+
+            //columns.AddFor(m => m.Result);
+
+            //columns.AddFor(m => m.PostDate);
+
+            //columns.AddFor(m => m.TranID);
+
+            //columns.AddFor(m => m.Ref);
+
+            //columns.AddFor(m => m.TrackID);
+
+            //columns.AddFor(m => m.Auth);
+            })
+
+            //.Paging(paging => paging.PageSize(10))
+            //                    .Pager(pager =>
+            //                    {
+            //                        pager.Visible(true);
+            //                        pager.DisplayMode(GridPagerDisplayMode.Full);
+            //                        pager.ShowPageSizeSelector(true);
+            //                        pager.AllowedPageSizes(new JS("[5, 10, 'all']"));
+            //                        pager.ShowInfo(true);
+            //                        pager.ShowNavigationButtons(true);
+
+            //                    })
+
+            //                    .HeaderFilter(headerFilter => headerFilter.Visible(true)).ShowColumnLines(true)
+            //                    .ShowRowLines(true)
+            //                    .RowAlternationEnabled(true)
+            //                    .AllowColumnReordering(true)
+            //                    .ShowRowLines(true)
+            //                    .ShowBorders(true)
+            //                    .SearchPanel(searchPanel => searchPanel
+            //                    .Visible(true)
+            //                    .Width(240)
+            //                    .Placeholder(sharedResource["SearchTxt"]))
+            //                    .RemoteOperations(true)
+            .RtlEnabled(bool.Parse(sharedResource["ArLang"]))
+            )
+        </div><!-- table-responsive -->
+    </div>
+
+</div>
+<partial name="_ValidationScriptsPartial" />
+<script>
+      $('#SearchAssetInputField').keypress(function (e) {
+        if (e.which == 13 ) {
+         $('form#SearchForm').submit();
+         return false;
+            }
+    });
+     }
+</script>
+

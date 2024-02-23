@@ -1,0 +1,205 @@
+﻿@page
+@model Memories.Areas.Admin.Pages.Payment.ConfirmDetailsModel
+@{
+    Layout = "~/Pages/Shared/_MainLayout.cshtml";
+}
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId={YOUR_FACBOOK_APP_ID}&autoLogAppEvents=1" nonce="ywRETNx8"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<div class="bg-primary">
+    <div class="container d-flex justify-content-center">
+        <ul class="nav nav-pills alternate nav-lg border-bottom-0">
+            <li class="nav-item"> <a class="nav-link" asp-area="admin" asp-page="/payment/create">Create</a></li>
+            <li class="nav-item"> <a class="nav-link active" asp-area="admin" asp-page="/payment/transactions">Transaction List</a></li>
+        </ul>
+    </div>
+</div>
+<!-- Secondary menu end -->
+<!-- Content
+============================================= -->
+<div id="content" class="py-4">
+    <div class="container">
+
+        <!-- Steps Progress bar -->
+        <div class="row mt-4 mb-5">
+            <div class="col-lg-11 mx-auto">
+                <div class="row widget-steps">
+                    <div class="col-4 step complete">
+                        <div class="step-name">@sharedResource["Create"]</div>
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <a asp-area="admin" asp-page="/payment/create" class="step-dot"></a>
+                    </div>
+                    <div class="col-4 step active">
+                        <div class="progress" style="background: #28a745;margin-top:44px">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="col-4 step active">
+                        <div class="step-name">@sharedResource["Details"]</div>
+                        <div class="progress" style="background: #28a745">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <a href="#" class="step-dot"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="fw-400 text-center mt-3">@sharedResource["Request Money"]</h2>
+        <p class="lead text-center mb-4">@sharedResource["You are requesting money from "]<span class="fw-500">@Model.payment.Email</span></p>
+        <div class="row">
+            <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
+                <div class="bg-white shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
+                    <!-- Request Money Confirm Details
+    ============================================= -->
+                    <h3 class="text-5 fw-400 mb-3 mb-sm-4">@sharedResource["Payment Details"]</h3>
+                    <hr class="mx-n3 mx-sm-n5 mb-4">
+                    <div class="row">
+                        <div class="col col-lg-6" style="padding-top:15px">
+                            <div class="row g-3 align-items-center">
+                                <p class="col-sm-4 text-muted text-sm-start mb-0 mb-sm-3">@sharedResource["Name"] :</p>
+                                <p class="col-sm-8 text-3">@Model.payment.FirstName &nbsp; @Model.payment.LastName</p>
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <p class="col-sm-4 text-muted text-sm-start mb-0 mb-sm-3">@sharedResource["Phone"]:</p>
+                                <p class="col-sm-8 text-3">@Model.payment.PhoneNumber</p>
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <p class="col-sm-4 text-muted text-sm-start mb-0 mb-sm-3">@sharedResource["Order NO"]:</p>
+                                <p class="col-sm-8 text-3">@Model.payment.OrderNumber</p>
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <p class="col-sm-4 text-muted text-sm-start fw-500 mb-0 mb-sm-3">@sharedResource["Amount"]:</p>
+                                <p class="col-sm-8 text-4 fw-500">@Model.payment.Amout KWD</p>
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <p class="col-sm-4 text-muted text-sm-start mb-0 mb-sm-3">@sharedResource["Date"]:</p>
+                                <p class="col-sm-8 text-3">@Model.payment.TransactionDate.ToShortDateString()</p>
+                            </div>
+
+                        </div>
+
+                        <div class="col col-lg-6">
+                            <div data-v-04358d3c="" role="listitem">
+                                <div class="v-list__tile theme--light">
+                                    <div data-v-04358d3c="" class="v-list__tile__content">
+                                        <img style="border-radius: 10px 40px;" width="250" height="250" src="@Model.QRScan" class="img-thumbnail" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr data-v-04358d3c="" class="v-divider theme--light">
+                    <div data-v-04358d3c="" role="listitem">
+                        <div class="v-list__tile theme--light row">
+                            @*<div class="input_copy_wrapper">
+                    <div class="input_copy">
+                        <span class="txt"></span>
+                        <span class="icon right">
+                            <img src="http://clipground.com/images/copy-4.png"
+                                 title="Click to Copy">
+                        </span>
+                    </div>
+
+                </div>*@
+                            <div class="alert alert-dismissible alert-success col-lg-12 col-md-12" style="display:none" id="alert">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                <strong>@sharedResource["URL Copied"] !</strong> .
+                            </div>
+
+
+                            <div data-v-04358d3c="" class="v-list__tile__content row">
+                                <div data-v-04358d3c="" class="v-list__tile__sub-title col-12 " style="color: #8e9a9d ">@sharedResource["Payment URL"] : <span style="font-size: 17px;font-family: initial;color:black" id="p1">@Model.URL</span></div>
+                                <div data-v-04358d3c="" class="v-list__tile__title dis_copy col-12 "
+                                     style=" word-break: break-word; justify-content: space-between; display: flex; margin-top: 18px; margin-bottom: 10px;">
+
+
+                                    <i style="cursor: pointer; color: #5dc7fd; font-weight: bold; font-size: x-large;" onclick="copyToClipboard('#p1')" data-v-04358d3c="" aria-hidden="true"
+                                       class="fas fa-copy"></i>
+
+                                    <i>
+                                        @*<a style="color: #5dc7fd; font-weight: bold; font-size: x-large; " href="whatsapp://send?text=@Model.URL" data-action="share/whatsapp/share"
+                            target="_blank" class="fa fa-whatsapp"></a>*@
+                                        <a style="color: #5dc7fd; font-weight: bold; font-size: x-large; " target="_blank" class="fa fa-whatsapp" href="https://api.whatsapp.com/send?text=@Model.URL" data-action="share/whatsapp/share"></a>
+
+                                    </i>
+
+                                    <a style=" color: #5dc7fd; font-weight: bold; font-size: x-large;" href="javascript:;" class="messenger-wrap" onclick="messengerShare()">
+                                        <i class="fab fa-facebook-messenger"></i>
+                                        @*<span>Share on Messenger</span>*@
+                                    </a>
+                                    <a style="color: #5dc7fd; font-weight: bold; font-size: x-large;" href="mailto:?body=@Model.URL" target="_top"><i class="fa-regular fa-envelope"></i></a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr data-v-04358d3c="" class="v-divider theme--light">
+                    <div data-v-04358d3c="" role="listitem">
+                        <div class="v-list__tile theme--light">
+                            <div data-v-04358d3c="" class="v-list__tile__content row">
+                                <div data-v-04358d3c="" class="v-list__tile__sub-title col-3">@sharedResource["Attachment URL"]: </div>
+                                <div data-v-04358d3c="" class="v-list__tile__title col-6">
+
+                                    <a style="color: #5dc7fd" data-v-04358d3c=""
+                                       href="~/@Model.payment.Attachment" download="">@sharedResource["Download"] </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Request Money Confirm Details end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+
+
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+        document.getElementById("alert").style.display = "block"
+    };
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '703844814106160', status: true, cookie: true,
+            xfbml: true
+        });
+    };
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '{YOUR_FACEBOOK_APP_ID}',
+        xfbml: true,
+        version: 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+};
+function isMobile() {
+    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i];
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+    function messengerShare() {
+        url = '@Model.Url';
+    if (isMobile()) {
+        window.location.href = "fb-messenger://share/?link=" + url;
+    } else {
+        FB.ui({
+            method: 'send',
+            link: url,
+            redirect_uri: url
+        });
+    }
+}
+</script>

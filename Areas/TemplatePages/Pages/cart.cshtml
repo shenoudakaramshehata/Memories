@@ -1,0 +1,229 @@
+﻿@page
+@model Memories.Pages.TemplatePages.cartModel
+@{
+//Layout = "_MemoriesLayout";
+}
+    <section class="breadcrumb-area">
+        <img src="~/Admin/assets/img/bg/innerpage-breadcrumb-bg-1.jpg" alt="" class="breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-box">
+                        <h3  class="page-title cartitemcolor">عربة التسوق</h3>
+                        <ul class="breadcrumb-list">
+                            <li><a href="index.html" >الصفحة الرئيسية</a></li>
+                            <li>عربة التسوق</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="cart-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="cart-c-box">
+                        <div class="ccbt">
+                            <table class="cart-table">
+                                <thead>
+                                    <tr>
+                                        <th> </th>
+                                        <th>المنتجt</th>
+                                        <th>السعر</th>
+                                        <th>كمية</th>
+                                        <th>مجموع</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="c-product-thumb">
+                                                <img src="~/Admin/assets/img/food-menu/cart-table-food.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p>Chicken fry</p>
+                                        </td>
+                                        <td>
+                                            <p>$20.00</p>
+                                        </td>
+                                        <td>
+                                            <div class="cartinc-dec">
+                                                <input type="text" name="qty" maxlength="12" value="0" class="input-text qty" />
+                                                <div class="button-inc-dec">
+                                                    <button class="cart-qty-plus" type="button" value="+"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+                                                    <button class="cart-qty-minus" type="button" value="-"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p>$20.00</p>
+                                        </td>
+                                        <td>
+                                            <div class="c-remove">
+                                                <div class="cr-icon">
+                                                    <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="c-product-thumb">
+                                                <img src="~/Admin/assets/img/food-menu/cart-table-food.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p>Chicken fry</p>
+                                        </td>
+                                        <td>
+                                            <p>$20.00</p>
+                                        </td>
+                                        <td>
+                                            <div class="cartinc-dec">
+                                                <input type="text" name="qty" maxlength="12" value="0" class="input-text qty" />
+                                                <div class="button-inc-dec">
+                                                    <button class="cart-qty-plus" type="button" value="+"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+                                                    <button class="cart-qty-minus" type="button" value="-"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p>$20.00</p>
+                                        </td>
+                                        <td>
+                                            <div class="c-remove">
+                                                <div class="cr-icon">
+                                                    <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart-cuopon-box">
+                            <input type="text" id="coupon" name="coupon" placeholder="Coupon code">
+                            <input type="submit" class="bfs-btn" value="Apply Coupon">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="cart-ct-box">
+                        <div class="ccbt">
+                            <table class="cart-total-table">
+                                <thead>
+                                    <tr>
+                                        <th>إجماليات سلة التسوق</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>المجموع الفرعي</p>
+                                        </td>
+                                        <td>
+                                            <p>$20.00</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>مجموع</p>
+                                        </td>
+                                        <td>
+                                            <p>$20.00</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="#" class="btn-style-a">باشرالخروج من الفندق</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="related-food-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-titleV2">
+                        <h3>قائمة ذات صلة</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="single-food-box">
+                        <div class="sfb-img">
+                            <img src="~/Admin/assets/img/food-menu/mpfood-1.jpg" alt="">
+                            <div class="sfbi-btn">
+                                <a href="#" class="add-cart-btn">أضف إلى السلة</a>
+                            </div>
+                        </div>
+                        <div class="sbf-info">
+                            <h4>دجاج مقلي</h4>
+                            <ul class="sbfi-ratings">
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            </ul>
+                            <p class="price">$20.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-food-box">
+                        <div class="sfb-img">
+                            <img src="~/Admin/assets/img/food-menu/mpfood-2.jpg" alt="">
+                            <div class="sfbi-btn">
+                                <a class="add-cart-btn">أضف إلى السلة</a>
+                            </div>
+                        </div>
+                        <div class="sbf-info">
+                            <h4>دجاج مقلي</h4>
+                            <ul class="sbfi-ratings">
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            </ul>
+                            <p class="price">$20.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-food-box">
+                        <div class="sfb-img">
+                            <img src="~/Admin/assets/img/food-menu/mpfood-4.jpg" alt="">
+                            <div class="sfbi-btn">
+                                <a href="#" class="add-cart-btn">أضف إلى السلة</a>
+                            </div>
+                        </div>
+                        <div class="sbf-info">
+                            <h4>دجاج مقلي</h4>
+                            <ul class="sbfi-ratings">
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            </ul>
+                            <p class="price">$20.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

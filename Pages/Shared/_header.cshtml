@@ -1,0 +1,105 @@
+﻿@{
+}
+<style>
+    a:hover {
+        color: #feea62 !important;
+    }
+
+    .btn {
+        background: #feea62 !important;
+    }
+
+        .btn:hover {
+            color: black !important;
+        }
+        .arrow{
+            color:black;
+        }
+</style>
+ <nav class="primary-menu navbar navbar-expand-lg" >
+    <div id="header-nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+            <li>
+                <a href="~/Index" style="font-weight: bold;">@sharedResource["Home"]</a>
+            </li>
+            @{
+                if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li><a asp-area="Admin" asp-page="/Payment/Create" style="font-weight: bold;">@sharedResource["Create Request"] </a></li>
+                    <li><a asp-area="Admin" asp-page="/repportmanagement/Trnsactions" style="font-weight: bold;">@sharedResource["Transaction Reports"] </a></li>
+                    <li> <a asp-area="Admin" style="font-weight: bold;" asp-page="/payment/transactions">@sharedResource["Payment List"]</a></li>
+                }}
+            <li class="dropdown langusage ">
+                <a  class="dropdown-toggle" href="#" style="font-weight: bold;">
+                    @{var locale = Context.Request.HttpContext.Features.Get<IRequestCultureFeature>();
+                        var BrowserCulture = locale.RequestCulture.UICulture.ToString();
+                        //English
+                        if (BrowserCulture == "en-US")
+                        {
+                            <span style="color: #505151" >@sharedResource["Language"] </span>
+                        }
+                        else
+                        {
+                            <span style="color: #505151" >@sharedResource["Language"] </span>
+                        }
+                    }
+                </a>
+                <ul class="dropdown-menu" >
+                    <li>
+                        <a asp-controller="Setting" asp-action="ChangeLanguage" asp-route-culture="en-US" asp-route-url="@Context.Request.Path@Context.Request.QueryString.ToString()" class="dropdown-item dropdown-toggle" onclick="ChangeLang('en')">
+                            <img src="/Admin/assets/images/flags/us_flag.jpg" alt="user-image" height="12"> <span class="align-middle"> English </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Setting" asp-action="ChangeLanguage" asp-route-culture="ar-EG" asp-route-url="@Context.Request.Path@Context.Request.QueryString.ToString()" class="dropdown-item dropdown-toggle" onclick="ChangeLang('ar')">
+                            <img width="18" height="18" src="/Admin/assets/images/flags/language-6.png" alt="user-image"> <span class="align-middle"> اللغة العربية  </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script>
+    function ChangeLang(lang) {
+
+        var anch1 = document.getElementById("ang1");
+        var anch2 = document.getElementById("ang2");
+        var masterPage = document.getElementById("masterPageId");
+        if (lang == "en") {
+            localStorage.setItem("lang", "en");
+
+        }
+        if (lang == "ar") {
+
+            localStorage.setItem("lang", "ar");
+
+        }
+
+    }
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var masterPage = document.getElementById("masterPageId");
+        if (localStorage.getItem("lang") != "") {
+            if (localStorage.getItem("lang") == "en") {
+                masterPage.dir = "ltr";
+                LangSelec.innerHTML = "En";
+
+                document.getElementById("masterbodyid").style.textAlign = "left"
+
+            }
+            else if (localStorage.getItem("lang") == "ar") {
+
+
+                masterPage.dir = "rtl"
+                LangSelec.innerHTML = "AR";
+                console.log(document.getElementById("masterbodyid"))
+                document.getElementById("masterbodyid").style.textAlign = "right"
+
+
+            }
+        }
+    });
+
+                               
+</script>

@@ -1,0 +1,562 @@
+﻿@using Microsoft.AspNetCore.Localization;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> sharedResource
+@{
+    var locale = Context.Request.HttpContext.Features.Get<IRequestCultureFeature>();
+    var BrowserCulture = locale.RequestCulture.UICulture.ToString();
+    var user = await UserManager.GetUserAsync(User);
+
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="masterPageId">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <link href="~/Memories Logo.png" rel="icon" />
+    <title>@sharedResource["Memories"] </title>
+    <meta name="description" content="@sharedResource["Memories"]">
+    <meta name="author" content="harnishdesign.net">
+
+    <!-- Web Fonts
+    ============================================= -->
+    <link rel="stylesheet" href="~/files/css/css2.css">
+
+    <link href="@Url.Content("~/Admin/assets/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Admin/assets/css/icons.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Admin/assets/css/app.min.css")" rel="stylesheet" type="text/css" />
+    <!-- Stylesheet
+    ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/files/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/files/vendor/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/files/vendor/owl.carousel/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/files/css/stylesheet.css" />
+    <!-- Colors Css -->
+    @*<link id="color-switcher" type="text/css" rel="stylesheet" href="#" />*@
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+
+    @*<link href="~/Css/devextreme/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/css/devextreme/dx.common.css" rel="stylesheet" />
+    <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type='text/javascript' src='https://knockoutjs.com/downloads/knockout-3.5.0.debug.js'>
+    </script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.js'></script>
+
+    @*  <script src="~/Admin/lib/popper/js/popper.js"></script>*@
+
+    <script src="https://kit.fontawesome.com/fb2a8bbabd.js" crossorigin="anonymous"></script>
+
+
+    @* <script src="~/js/devextreme/jquery.js"></script>*@
+    @*<script src="~/js/devextreme/bootstrap.js"></script>*@
+    <script src="~/js/devextreme/dx.all.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
+
+
+    @* end devextreme*@
+
+    <style>
+        .DeleteValidation {
+            text-align: center;
+            font-size: 25px;
+        }
+
+        td {
+            text-align: center !important;
+        }
+
+        @@media only screen and (max-width: 320px) {
+            .dropdown-menu > li > a {
+                text-align: center;
+            }
+
+            .dropdown-menu {
+                width: 100%;
+            }
+        }
+         .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .btn-link::selection {
+            background: black !important;
+        }
+
+        .invers {
+            color: #feea62 !important;
+        }
+
+        .dx-button {
+            color: black !important;
+            background: #feea62 !important;
+        }
+
+        .invers:hover {
+            color: black !important;
+        }
+
+        .buttomclass {
+            background: #feea62 !important;
+        }
+    </style>
+    <link href="~/Admin/assets/css/custom.css" rel="stylesheet" />
+</head>
+<body id="masterbodyid">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div data-loader="dual-ring"></div>
+    </div>
+    <!-- Preloader End -->
+    <!-- Document Wrapper
+    ============================================= -->
+    <div id="main-wrapper">
+
+        <!-- Header
+        ============================================= -->
+        <header id="header">
+            <div class="container">
+                <div class="header-row">
+                    <div class="header-column justify-content-start">
+                        <!-- Logo
+                        ============================= -->
+                        <div class="logo me-3"> <a class="d-flex" href="~/index" title="@sharedResource["Memories"] "><img src="~/Memories Logo.png" width="150" height="60" alt="Memories" /></a> </div>
+                        <!-- Logo end -->
+                        <!-- Primary Navigation
+                        ============================== -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-nav"> <span></span> <span></span> <span></span> </button>
+
+                        <partial name="_header" />
+
+                        <!-- Primary Navigation end -->
+                    </div>
+                    <div class="header-column justify-content-end">
+                        <!-- Login & Signup Link
+                        ============================== -->
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                //<nav class="login-signup navbar navbar-expand dropdown">
+                                //    <ul class="navbar-nav">
+                                //        <li class="dropdown">
+                                //            <a class="dropdown-toggle" href="#">Hello @User.Identity.Name</a>
+                                //            <ul class="dropdown-menu">
+                                //                <li><a asp-area="Identity" asp-page="/Account/ChangePassword" class="dropdown-item">@sharedResource["Change Password"] </a></li>
+                                //                <li><a asp-controller="Setting" asp-action="Logout" class="dropdown-item">@sharedResource["Logout"] </a></li>
+                                //            </ul>
+                                //        </li>
+                                //    </ul>
+                                //</nav>
+
+                                //<nav class="login-signup navbar navbar-expand " data-bs-toggle="collapse">
+
+                                <style>
+                                    /* Style The Dropdown Button */
+                                    .dropbtn {
+                                        color: white;
+                                        padding: 16px;
+                                        font-size: 16px;
+                                        border: none;
+                                        cursor: pointer;
+                                    }
+
+                                    .dropdown-item::selection {
+                                        background: #e6e6e6 !important;
+                                    }
+
+                                    .dropdown-item:checked {
+                                        background: white !important;
+                                    }
+                                    /* The container <div> - needed to position the dropdown content */
+                                    .dropdown {
+                                        position: relative;
+                                        display: inline-block;
+                                    }
+
+                                    a:active {
+                                        background: white !important;
+                                    }
+                                    /* Dropdown Content (Hidden by Default) */
+                                    .dropdown-content {
+                                        display: none;
+                                        position: absolute;
+                                        background-color: white;
+                                        min-width: 160px;
+                                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                                        z-index: 1;
+                                        padding: 27px;
+                                        border-radius: 7px;
+                                        margin-top: 12px;
+                                        justify-content: center;
+                                    }
+
+                                        /* Links inside the dropdown */
+                                        .dropdown-content a {
+                                            color: black;
+                                            padding: 12px 16px;
+                                            text-decoration: none;
+                                            display: block;
+                                        }
+
+                                    .dropdown:hover .dropdown-content {
+                                        display: block;
+                                    }
+
+                                    .btn-link::selection {
+                                        background: black !important;
+                                    }
+
+                                    .invers {
+                                        color: #5dc7fd !important;
+                                    }
+
+                                    .dx-button {
+                                        color: black !important;
+                                        background: #5dc7fd !important;
+                                    }
+
+                                    .invers:hover {
+                                        color: black !important;
+                                    }
+
+                                    .buttomclass {
+                                        background: #5dc7fd !important;
+                                    }
+                                </style>
+
+
+                                if (BrowserCulture == "en-US")
+                                {
+                                    <div class="dropdown profile ms-2" style="margin-right: 115px;">
+                                        @if (user.Photo == null)
+                                        {
+                                            <a class="dropbtn" style="padding: 0px;">
+                                                <img class="rounded-circle " src="~/images/be29aa39-e0a3-4b78-a503-cd7edcae9bdb.jfif" alt="Header Avatar" style="height: 3rem; width: 3rem" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+
+                                            <a class="dropbtn" style="padding: 0px;">
+                                                <img class="rounded-circle " src="~/@user.Photo" alt="Header Avatar" style="height: 3rem; width: 3rem" />
+                                            </a>
+                                        }
+                                    <div class="dropdown-content " style=" margin-left: -47px; margin-top:0!important;">
+                                        <span style="padding: 0px 20px 10px 20px;" class="text-center text-3 py-2">@sharedResource["Hi"],  @User.Identity.Name</span>
+                                        <a class="dropdown-item" asp-area="Admin" asp-page="/users/EditProfile"><i style="padding: 0px 20px 10px 20px; " class="fas fa-user"></i>@sharedResource["Edit Profile"]</a>
+
+                                        <a class="dropdown-item" asp-controller="Setting" asp-action="Logout"><i style="padding: 0px 20px 10px 20px;" class="fas fa-sign-out-alt"></i>@sharedResource["Sign Out"]</a>
+                                    </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="dropdown profile ms-2" style="margin-left: 90px!important;">
+                                        @if (user.Photo == null)
+                                        {
+                                            <a class="dropbtn" style="padding: 0px;">
+                                                <img class="rounded-circle " src="~/images/be29aa39-e0a3-4b78-a503-cd7edcae9bdb.jfif" alt="Header Avatar" style="height: 3rem; width: 3rem" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+
+                                            <a class="dropbtn" style="padding: 0px;">
+                                                <img class="rounded-circle " src="~/@user.Photo" alt="Header Avatar" style="height: 3rem; width: 3rem" />
+                                            </a>
+                                        }
+                                    <div class="dropdown-content " style=" margin-right: -45px; margin-top: 0 !important;">
+                                        <span style="padding: 0px 0px 10px 20px;" class="text-center text-3 py-2">@sharedResource["Hi"],  @User.Identity.Name</span>
+                                        <a class="dropdown-item" asp-area="Admin" asp-page="/users/EditProfile"><i style="padding: 0px 0px 10px 20px;" class="fas fa-user"></i>@sharedResource["Edit Profile"]</a>
+
+                                        <a class="dropdown-item" asp-controller="Setting" asp-action="Logout"><i style="padding: 0px 0px 10px 20px;" class="fas fa-sign-out-alt"></i>@sharedResource["Sign Out"]</a>
+                                    </div>
+                                    </div>
+                                }
+
+                                <!--<nav class="login-signup navbar navbar-expand">
+                                <ul class="navbar-nav">
+
+
+                                    <li class="dropdown profile ms-2">
+                                        <a class="px-0 dropdown-toggle" href="#">-->
+                                @*<img class="rounded-circle" src="images/profile-thumb-sm.jpg" alt="">*@
+
+
+                                <!--<img class="rounded-circle " src="~/images/be29aa39-e0a3-4b78-a503-cd7edcae9bdb.jfif" alt="Header Avatar" style="height: 3rem; width: 3rem" />
+                                                <i class="arrow"></i>
+
+                                            </a>
+                                            <ul class="dropdown-menu" style="margin-left: -190px; display: none;  padding-top: 10px; margin-top: 0px; padding-bottom: 10px; margin-bottom: 0px;">
+                                                <li class="text-center text-3 py-2">@sharedResource["Hi"],  @User.Identity.Name</li>
+                                                <li class="dropdown-divider mx-n3"></li>
+                                                <li><a class="dropdown-item" asp-area="Admin" asp-page="/Profile"><i class="fas fa-user"></i>@sharedResource["My Profile"]</a></li>
+                                                <li><a class="dropdown-item" asp-area="Identity" asp-page="/account/manage/ChangePassword"><i class="fas fa-shield-alt"></i>@sharedResource["Change Password"]</a></li>
+
+                                                <li class="dropdown-divider mx-n3"></li>
+                                                <li><a class="dropdown-item" asp-controller="Setting" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>@sharedResource["Sign Out"]</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>-->
+                                <!--}
+                                else
+                                {
+                                    <nav class="login-signup navbar navbar-expand">
+                                        <ul class="navbar-nav">
+
+
+                                            <li class="dropdown profile ms-2">
+                                                <a class="px-0 dropdown-toggle" href="#">-->
+                                @*<img class="rounded-circle" src="images/profile-thumb-sm.jpg" alt="">*@
+
+                                <!--<img class="rounded-circle " src="~/images/default-avatar.png" alt="Header Avatar" style="height: 3rem; width: 3rem" />
+                                                        <i class="arrow"></i>
+
+
+                                                </a>
+                                                <ul class="dropdown-menu" style="margin-left: -190px; display: none;  padding-top: 10px; margin-top: 0px; padding-bottom: 10px; margin-bottom: 0px;">
+                                                    <li class="text-center text-3 py-2">@sharedResource["Hi"],  @User.Identity.Name</li>
+                                                    <li class="dropdown-divider mx-n3"></li>
+                                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Profile"><i class="fas fa-user"></i>@sharedResource["My Profile"]</a></li>
+                                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/account/manage/ChangePassword"><i class="fas fa-shield-alt"></i>@sharedResource["Change Password"]</a></li>
+
+                                                    <li class="dropdown-divider mx-n3"></li>
+                                                    <li><a class="dropdown-item" asp-controller="Setting" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>@sharedResource["Sign Out"]</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                }-->
+
+
+
+
+                            }
+                            else
+                            {
+                                <nav class="login-signup navbar navbar-expand">
+                                    <ul class="navbar-nav">
+                                        <li><a asp-area="Identity" asp-page="/Account/Login">@sharedResource["Login"]</a> </li>
+                                        <li class="align-items-center h-auto ms-sm-3"><a class="btn btn-primary" asp-area="Identity" asp-page="/Account/register">@sharedResource["Sign Up"]</a></li>
+                                    </ul>
+                                </nav>
+                            }
+                        }
+
+                        @*@{
+                                if (User.Identity.IsAuthenticated)
+                                {
+                                    //<nav class="login-signup navbar navbar-expand dropdown">
+                                    //    <ul class="navbar-nav">
+                                    //        <li class="dropdown">
+                                    //            <a class="dropdown-toggle" href="#">Hello @User.Identity.Name</a>
+                                    //            <ul class="dropdown-menu">
+                                    //                <li><a asp-area="Identity" asp-page="/Account/ChangePassword" class="dropdown-item">@sharedResource["Change Password"] </a></li>
+                                    //                <li><a asp-controller="Setting" asp-action="Logout" class="dropdown-item">@sharedResource["Logout"] </a></li>
+                                    //            </ul>
+                                    //        </li>
+                                    //    </ul>
+                                    //</nav>
+
+                                    //<nav class="login-signup navbar navbar-expand " data-bs-toggle="collapse">
+
+
+                                    if (BrowserCulture == "en-US")
+                                    {
+                                        <nav class="login-signup navbar navbar-expand">
+                                            <ul class="navbar-nav">
+                                                <li class="dropdown profile ms-2">
+
+                                                    <a style="color:black" class="px-0 dropdown-toggle" href="#"><i class="fa fa-gear" width="30" height="27" fill="currentColor" viewBox="0 0 16 16"></i></a>
+
+                                                    <ul class="dropdown-menu">
+                                                        <li class="text-center text-3 py-2">@sharedResource["Hi"] , @User.Identity.Name</li>
+                                                        <li class="dropdown-divider mx-n3"></li>
+                                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="Profile"><i class="fas fa-user"></i>@sharedResource["My Profile"]</a></li>
+                                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Users/ChangeEmail"><i class="fas fa-envelope"></i>@sharedResource["Change Email"]</a></li>
+                                                        <li><a class="dropdown-item" asp-area="Identity" asp-page="/account/manage/ChangePassword"><i class="fas fa-shield-alt"></i>@sharedResource["Change Password"]</a></li>
+                                                        <li class="dropdown-divider mx-n3"></li>
+                                                        <li><a class="dropdown-item" asp-controller="Setting" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>@sharedResource["Sign Out"]</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    }
+                                    else
+                                    {
+                                        <nav class="login-signup navbar navbar-expand" style="margin-left:270px;">
+                                            <ul class="navbar-nav">
+                                                <li class="dropdown profile ms-2">
+
+                                                    <a style="color:black" class="px-0 dropdown-toggle" href="#"><i class="fa fa-gear" width="30" height="27" fill="currentColor" viewBox="0 0 16 16"></i></a>
+
+                                                    <ul class="dropdown-menu" style="text-align:right;">
+                                                        <li class="text-center text-3 py-2">@sharedResource["Hi"] , @User.Identity.Name</li>
+                                                        <li class="dropdown-divider mx-n3"></li>
+                                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="Profile"><i class="fas fa-user"></i>@sharedResource["My Profile"]</a></li>
+                                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Users/ChangeEmail"><i class="fas fa-envelope"></i>@sharedResource["Change Email"]</a></li>
+
+                                                        <li><a class="dropdown-item" asp-area="Identity" asp-page="/account/manage/ChangePassword"><i class="fas fa-shield-alt"></i>@sharedResource["Change Password"]</a></li>
+                                                        <li class="dropdown-divider mx-n3"></li>
+                                                        <li><a class="dropdown-item" asp-controller="Setting" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>@sharedResource["Sign Out"]</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    }
+
+
+
+
+                                }
+                                else
+                                {
+                                    <nav class="login-signup navbar navbar-expand">
+                                        <ul class="navbar-nav">
+                                            <li><a asp-area="Identity" asp-page="/Account/Login">@sharedResource["Login"]</a> </li>
+                                            <li class="align-items-center h-auto ms-sm-3"><a class="btn btn-primary" asp-area="Identity" asp-page="/Account/register">@sharedResource["Sign Up"]</a></li>
+                                        </ul>
+                                    </nav>
+                                }
+                            }*@
+
+
+                        <!-- Login & Signup Link end -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
+        <!-- Content
+        ============================================= -->
+        <div id="content">
+
+            @RenderBody();
+
+        </div>
+        <!-- Content end -->
+        <!-- Footer
+        ============================================= -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    @*<div class="col-lg d-lg-flex align-items-center">
+                            <ul class="nav justify-content-center justify-content-lg-start text-3">
+                                <li class="nav-item"> <a class="nav-link active" href="#">@sharedResource["About Us"] </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="#">@sharedResource["Support"] </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="#">@sharedResource["Help"]</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="#">@sharedResource["Careers"]</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="#">@sharedResource["Affiliate"]</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="#">@sharedResource["Fees"]</a></li>
+                            </ul>
+                        </div>*@
+                    <div class="col-lg-12 d-lg-flex justify-content-lg-center mt-3 mt-lg-0">
+                        <ul class="social-icons justify-content-center">
+                            <li class="social-icons-facebook"><a data-bs-toggle="tooltip" href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="social-icons-twitter"><a data-bs-toggle="tooltip" href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li class="social-icons-google"><a data-bs-toggle="tooltip" href="http://www.google.com/" target="_blank" title="Google"><i class="fab fa-google"></i></a></li>
+                            <li class="social-icons-youtube"><a data-bs-toggle="tooltip" href="http://www.youtube.com/" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-copyright pt-3 pt-lg-2 mt-2">
+                    <div class="row">
+                        <div class="col-lg-12 d-lg-flex align-items-center justify-content-lg-center">
+                            <p class="text-center text-lg-start mb-2 mb-lg-0">@sharedResource["Copyright &copy; 2022"] <a>@sharedResource["Memories"]</a> @sharedResource["All Rights Reserved"].</p>
+                        </div>
+                        @*<div class="col-lg d-lg-flex align-items-center justify-content-lg-end">
+                                <ul class="nav justify-content-center">
+                                    <li class="nav-item"> <a class="nav-link active" href="#">@sharedResource["Security"]</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="#">@sharedResource["Terms"]</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="#">@sharedResource["Privacy"]</a></li>
+                                </ul>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer end -->
+
+    </div>
+    <!-- Document Wrapper end -->
+    <!-- Back to Top
+    ============================================= -->
+    <a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- Video Modal
+    ============================================= -->
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content bg-transparent border-0">
+                <button type="button" class="btn-close btn-close-white ms-auto me-n3" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="video" src="" allow="autoplay;" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Modal end -->
+    <!-- Styles Switcher -->
+    @* <div id="styles-switcher" class="left">
+        <h2 class="text-3">@sharedResource["Color Switcher"] </h2>
+        <hr>
+        <ul>
+        <li class="blue" data-bs-toggle="tooltip" title="Blue" data-path="css/color-blue.css"></li>
+        <li class="indigo" data-bs-toggle="tooltip" title="Indigo" data-path="css/color-indigo.css"></li>
+        <li class="purple" data-bs-toggle="tooltip" title="Purple" data-path="css/color-purple.css"></li>
+        <li class="pink" data-bs-toggle="tooltip" title="Pink" data-path="css/color-pink.css"></li>
+        <li class="red" data-bs-toggle="tooltip" title="Red" data-path="css/color-red.css"></li>
+        <li class="orange" data-bs-toggle="tooltip" title="Orange" data-path="css/color-orange.css"></li>
+        <li class="yellow" data-bs-toggle="tooltip" title="Yellow" data-path="css/color-yellow.css"></li>
+        <li class="teal" data-bs-toggle="tooltip" title="Teal" data-path="css/color-teal.css"></li>
+        <li class="cyan" data-bs-toggle="tooltip" title="Cyan" data-path="css/color-cyan.css"></li>
+        <li class="brown" data-bs-toggle="tooltip" title="Brown" data-path="css/color-brown.css"></li>
+        </ul>
+        <button class="btn btn-dark btn-sm border-0 fw-400 rounded-0 shadow-none" data-bs-toggle="tooltip" title="Green" id="reset-color">@sharedResource["Reset Default"] </button>
+        <button class="btn switcher-toggle"><i class="fas fa-cog"></i></button>
+        </div>*@
+    <!-- Styles Switcher End -->
+    <!-- Script -->
+    <!--<script src="~/Admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Admin/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/Admin/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/Admin/assets/libs/node-waves/waves.min.js"></script>-->
+    <!-- Datatable init js -->
+    <!--<script src="~/Admin/assets/js/pages/datatables.init.js"></script>
+    <script src="~/Admin/assets/js/app.js"></script>-->
+    <script src="~/files/vendor/jquery/jquery.min.js"></script>
+    <script src="~/files/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/files/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <!-- Style Switcher -->
+    <script src="~/files/js/switcher.min.js"></script>
+    <script src="~/files/js/theme.js"></script>
+</body>
+</html>
+@*<li class="dropdown profile ms-2">
+    <a class="btn btn-secondary dropdown-toggle" style="background: none; color: black; border: none; box-shadow: none; " data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa fa-gear" width="30" height="27" fill="currentColor" viewBox="0 0 16 16"></i>
+    </a>
+    <ul class="dropdown-menu">
+
+    <li class="text-center text-3 py-2">@sharedResource["Hi"] , @User.Identity.Name</li>
+    <li class="dropdown-divider mx-n3"></li>
+    <li><a style="text-align:center" class="dropdown-item" asp-area="Admin" asp-page="Profile"><i class="fas fa-user"></i>@sharedResource["My Profile"] </a></li>
+    <li><a style="text-align:center" class="dropdown-item" asp-area="Identity" asp-page="/account/manage/ChangePassword"><i class="fas fa-shield-alt"></i>@sharedResource["Change Password"]</a></li>
+
+    <li class="dropdown-divider mx-n3"></li>
+    <li><a style="text-align:center" class="dropdown-item" asp-controller="Setting" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>@sharedResource["Sign Out"]</a></li>
+    </ul>
+    </li>*@
